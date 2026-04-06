@@ -11,165 +11,57 @@
     background: #0f172a;
     color: #e2e8f0;
     line-height: 1.7;
-    padding: 2rem;
+    padding: 2rem 1rem;
   }
   .container { max-width: 960px; margin: 0 auto; }
 
-  h1 {
-    font-size: 2rem;
-    color: #38bdf8;
-    border-bottom: 2px solid #1e3a5f;
-    padding-bottom: 0.8rem;
-    margin-bottom: 1.5rem;
-  }
-  h2 {
-    font-size: 1.5rem;
-    color: #7dd3fc;
-    margin: 2.5rem 0 1rem;
-    padding-left: 0.5rem;
-    border-left: 4px solid #0ea5e9;
-  }
-  h3 {
-    font-size: 1.15rem;
-    color: #bae6fd;
-    margin: 1.5rem 0 0.6rem;
-  }
-
+  h1 { font-size: 2rem; color: #38bdf8; border-bottom: 2px solid #1e3a5f; padding-bottom: 0.8rem; margin-bottom: 1.5rem; }
+  h2 { font-size: 1.5rem; color: #7dd3fc; margin: 2.5rem 0 1rem; padding-left: 0.5rem; border-left: 4px solid #0ea5e9; }
+  h3 { font-size: 1.15rem; color: #bae6fd; margin: 1.5rem 0 0.6rem; }
   p { margin: 0.6rem 0; color: #cbd5e1; }
 
-  pre {
-    background: #1e293b;
-    border: 1px solid #334155;
-    border-radius: 8px;
-    padding: 1rem 1.2rem;
-    overflow-x: auto;
-    margin: 0.8rem 0;
-    font-size: 0.9rem;
-    line-height: 1.6;
-  }
-  code {
-    font-family: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, monospace;
-    color: #a5f3fc;
-  }
+  pre { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 1rem 1.2rem; overflow-x: auto; margin: 0.8rem 0; font-size: 0.9rem; line-height: 1.6; }
+  code { font-family: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, monospace; color: #a5f3fc; }
   pre code { color: #e2e8f0; }
+  .keyword { color: #c084fc; } .string { color: #86efac; } .comment { color: #64748b; } .cmd { color: #fbbf24; }
 
-  .keyword { color: #c084fc; }
-  .string  { color: #86efac; }
-  .comment { color: #64748b; }
-  .cmd     { color: #fbbf24; }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1rem 0;
-    font-size: 0.92rem;
-  }
-  th {
-    background: #1e3a5f;
-    color: #7dd3fc;
-    text-align: left;
-    padding: 0.6rem 1rem;
-    border: 1px solid #334155;
-  }
-  td {
-    padding: 0.5rem 1rem;
-    border: 1px solid #334155;
-    color: #cbd5e1;
-  }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.92rem; }
+  th { background: #1e3a5f; color: #7dd3fc; text-align: left; padding: 0.6rem 1rem; border: 1px solid #334155; }
+  td { padding: 0.5rem 1rem; border: 1px solid #334155; color: #cbd5e1; }
   tr:nth-child(even) td { background: #1e293b; }
 
-  .arch-diagram {
-    background: #1e293b;
-    border: 1px solid #334155;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin: 1rem 0;
-    text-align: center;
-  }
-  .arch-diagram pre {
-    display: inline-block;
-    text-align: left;
-    border: none;
-    background: none;
-    padding: 0;
-    font-size: 0.85rem;
-    color: #94a3b8;
-  }
+  .arch-diagram { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 1.5rem; margin: 1rem 0; text-align: center; }
+  .arch-diagram pre { display: inline-block; text-align: left; border: none; background: none; padding: 0; font-size: 0.85rem; color: #94a3b8; }
 
-  .file-tree {
-    background: #1e293b;
-    border: 1px solid #334155;
-    border-radius: 8px;
-    padding: 1rem 1.5rem;
-    margin: 1rem 0;
-    font-family: monospace;
-    font-size: 0.9rem;
-    color: #94a3b8;
-    line-height: 1.8;
-  }
-  .file-tree .dir  { color: #38bdf8; font-weight: bold; }
-  .file-tree .file { color: #86efac; }
-  .file-tree .desc { color: #64748b; }
+  .file-tree { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 1rem 1.5rem; margin: 1rem 0; font-family: monospace; font-size: 0.9rem; color: #94a3b8; line-height: 1.8; }
+  .file-tree .dir { color: #38bdf8; font-weight: bold; } .file-tree .file { color: #86efac; } .file-tree .desc { color: #64748b; }
 
-  .badge {
-    display: inline-block;
-    padding: 0.15rem 0.6rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-right: 0.3rem;
-  }
-  .badge-aws  { background: #7c3aed33; color: #c4b5fd; border: 1px solid #7c3aed55; }
-  .badge-mac  { background: #0ea5e933; color: #7dd3fc; border: 1px solid #0ea5e955; }
-  .badge-bl   { background: #f59e0b33; color: #fcd34d; border: 1px solid #f59e0b55; }
+  .badge { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-right: 0.3rem; }
+  .badge-aws { background: #7c3aed33; color: #c4b5fd; border: 1px solid #7c3aed55; }
+  .badge-mac { background: #0ea5e933; color: #7dd3fc; border: 1px solid #0ea5e955; }
+  .badge-bl  { background: #f59e0b33; color: #fcd34d; border: 1px solid #f59e0b55; }
 
-  .step {
-    background: #1e293b;
-    border: 1px solid #334155;
-    border-radius: 8px;
-    padding: 1.2rem 1.5rem;
-    margin: 1rem 0;
-  }
-  .step-num {
-    display: inline-block;
-    width: 28px; height: 28px;
-    line-height: 28px;
-    text-align: center;
-    background: #0ea5e9;
-    color: #0f172a;
-    border-radius: 50%;
-    font-weight: bold;
-    font-size: 0.85rem;
-    margin-right: 0.5rem;
-  }
+  .step { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 1.2rem 1.5rem; margin: 1rem 0; }
+  .step-num { display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center; background: #0ea5e9; color: #0f172a; border-radius: 50%; font-weight: bold; font-size: 0.85rem; margin-right: 0.5rem; }
   .step h3 { display: inline; }
 
-  .note {
-    background: #422006;
-    border: 1px solid #78350f;
-    border-radius: 6px;
-    padding: 0.8rem 1rem;
-    margin: 1rem 0;
-    color: #fcd34d;
-    font-size: 0.9rem;
-  }
-  .note::before { content: "⚠ "; }
+  .note { background: #422006; border: 1px solid #78350f; border-radius: 6px; padding: 0.8rem 1rem; margin: 1rem 0; color: #fcd34d; font-size: 0.9rem; }
+  .note::before { content: "! "; font-weight: bold; }
 
-  .flow-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.3rem 0;
-    color: #94a3b8;
-  }
+  .tip { background: #172554; border: 1px solid #1e3a5f; border-radius: 6px; padding: 0.8rem 1rem; margin: 1rem 0; color: #93c5fd; font-size: 0.88rem; }
+  .tip strong { color: #60a5fa; }
+
+  .flow-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0; color: #94a3b8; }
   .flow-arrow { color: #475569; }
+
+  footer { margin-top: 3rem; text-align: center; color: #334155; font-size: 0.82rem; }
 </style>
 </head>
 <body>
 <div class="container">
 
 <h1>Blender Remote Bridge 部署文档</h1>
-<p>在 AWS 上使用 Claude Code 远程控制公司内网 Mac 上的 Blender 3.6，用于插件开发和调试。</p>
+<p>在 AWS 上使用 Claude Code 远程控制公司内网 Mac 上的 Blender，基于 <a href="https://github.com/ahujasid/blender-mcp" style="color:#60a5fa">blender-mcp</a> 插件。</p>
 
 <!-- ==================== 架构 ==================== -->
 <h2>一、系统架构</h2>
@@ -178,267 +70,145 @@
 
 <div class="arch-diagram">
 <pre>
-<span class="badge badge-aws">AWS</span>                                      <span class="badge badge-mac">Mac 公司内网</span>
+<span class="badge badge-aws">AWS</span>                                         <span class="badge badge-mac">Mac 公司内网</span>
 
-┌───────────┐  POST   ┌────────────┐         ┌──────────────┐      ┌──────────┐
-│  CLI Tool │───────▶│ Relay Server│◀──poll──│ Bridge Agent │─────▶│ <span class="badge badge-bl">Blender</span> │
-│ (cli.py)  │◀───────│  (FastAPI)  │────────▶│ (bridge.py)  │◀─────│  Addon   │
-└───────────┘  GET    └────────────┘         └──────────────┘      └──────────┘
-                         :8080                                    localhost:9876
+┌───────────┐  POST   ┌────────────┐            ┌──────────────┐      ┌──────────────┐
+│  Claude   │───────>│ Relay Server│<───poll────│ Bridge Agent │─────>│ <span class="badge badge-bl">Blender</span>      │
+│  Code/CLI │<───────│  (FastAPI)  │───────────>│ (bridge.py)  │<─────│ blender-mcp  │
+└───────────┘  GET    └────────────┘            └──────────────┘      │ addon        │
+                         :8080                   TCP Socket :9876      └──────────────┘
 </pre>
 </div>
 
-<h3>数据流</h3>
-<div class="flow-item">Claude 调用 CLI <span class="flow-arrow">→</span> CLI 发任务到 Relay <span class="flow-arrow">→</span> Mac Bridge 轮询拿到任务 <span class="flow-arrow">→</span> 调 Blender Addon 执行 <span class="flow-arrow">→</span> 结果原路返回</div>
-
-<h3>延迟预估</h3>
-<table>
-  <tr><th>操作</th><th>预估往返</th><th>说明</th></tr>
-  <tr><td>截图</td><td>1-3 秒</td><td>含 1s 平均轮询延迟 + 截图 + 传输</td></tr>
-  <tr><td>脚本执行</td><td>1-2 秒</td><td>简单脚本；复杂操作视具体执行时间</td></tr>
-  <tr><td>日志获取</td><td>1-2 秒</td><td>直接返回内存缓冲区</td></tr>
-</table>
+<div class="flow-item">Claude 调用 CLI/MCP <span class="flow-arrow">-></span> Relay Server <span class="flow-arrow">-></span> Mac Bridge 轮询拿到任务 <span class="flow-arrow">-></span> TCP Socket 发给 blender-mcp <span class="flow-arrow">-></span> 结果原路返回</div>
 
 <!-- ==================== 文件结构 ==================== -->
 <h2>二、项目文件结构</h2>
 
 <div class="file-tree">
 <span class="dir">bl/</span><br>
-├── <span class="dir">relay/</span> <span class="desc">── AWS 端，中继服务器</span><br>
-│&nbsp;&nbsp; ├── <span class="file">server.py</span> <span class="desc">── FastAPI 服务</span><br>
-│&nbsp;&nbsp; ├── <span class="file">models.py</span> <span class="desc">── Pydantic 数据模型</span><br>
+├── <span class="dir">relay/</span> <span class="desc">── AWS 端，FastAPI 中继服务器</span><br>
+│&nbsp;&nbsp; ├── <span class="file">server.py</span> <span class="desc">── 服务主程序</span><br>
+│&nbsp;&nbsp; ├── <span class="file">models.py</span> <span class="desc">── 数据模型</span><br>
 │&nbsp;&nbsp; └── <span class="file">requirements.txt</span><br>
-├── <span class="dir">bridge/</span> <span class="desc">── Mac 端，轮询代理</span><br>
+├── <span class="dir">bridge/</span> <span class="desc">── Mac 端，轮询代理（TCP Socket 连接 blender-mcp）</span><br>
 │&nbsp;&nbsp; ├── <span class="file">bridge.py</span> <span class="desc">── 主程序</span><br>
 │&nbsp;&nbsp; ├── <span class="file">config.py</span> <span class="desc">── 环境变量配置</span><br>
 │&nbsp;&nbsp; └── <span class="file">requirements.txt</span><br>
-├── <span class="dir">addon/blender_remote/</span> <span class="desc">── Blender 3.6 插件</span><br>
-│&nbsp;&nbsp; ├── <span class="file">__init__.py</span> <span class="desc">── 插件注册</span><br>
-│&nbsp;&nbsp; ├── <span class="file">server.py</span> <span class="desc">── localhost:9876 HTTP 服务</span><br>
-│&nbsp;&nbsp; ├── <span class="file">executor.py</span> <span class="desc">── 主线程执行队列 (bpy.app.timers)</span><br>
-│&nbsp;&nbsp; └── <span class="file">capture.py</span> <span class="desc">── 截图和日志捕获</span><br>
 ├── <span class="dir">cli/</span> <span class="desc">── AWS 端，Claude 用的 CLI</span><br>
 │&nbsp;&nbsp; ├── <span class="file">cli.py</span> <span class="desc">── 命令行工具</span><br>
 │&nbsp;&nbsp; └── <span class="file">requirements.txt</span><br>
-└── <span class="dir">mcp/</span> <span class="desc">── AWS 端，MCP Server（推荐）</span><br>
-&nbsp;&nbsp;&nbsp; ├── <span class="file">blender_mcp_server.py</span> <span class="desc">── MCP 工具封装</span><br>
-&nbsp;&nbsp;&nbsp; └── <span class="file">requirements.txt</span>
+├── <span class="dir">mcp/</span> <span class="desc">── AWS 端，MCP Server（推荐）</span><br>
+│&nbsp;&nbsp; ├── <span class="file">blender_mcp_server.py</span> <span class="desc">── MCP 工具封装</span><br>
+│&nbsp;&nbsp; └── <span class="file">requirements.txt</span><br>
+└── <span class="file">mac.sh</span> <span class="desc">── Mac 端 Bridge 启动脚本</span>
 </div>
 
-<!-- ==================== 组件说明 ==================== -->
-<h2>三、组件说明</h2>
+<!-- ==================== 首次搭建 ==================== -->
+<h2>三、首次搭建</h2>
 
-<h3><span class="badge badge-aws">AWS</span> Relay Server — 中继服务器</h3>
-<p>FastAPI 应用，负责中转任务和结果。内存存储，任务 5 分钟过期自动清理。</p>
-
-<table>
-  <tr><th>方法</th><th>端点</th><th>用途</th></tr>
-  <tr><td>POST</td><td><code>/tasks</code></td><td>创建任务（CLI 调用）</td></tr>
-  <tr><td>GET</td><td><code>/tasks/pending</code></td><td>获取待执行任务（Bridge 轮询）</td></tr>
-  <tr><td>POST</td><td><code>/tasks/{id}/result</code></td><td>提交执行结果（Bridge 调用）</td></tr>
-  <tr><td>GET</td><td><code>/tasks/{id}/result?wait=N</code></td><td>长轮询等待结果（CLI 调用）</td></tr>
-  <tr><td>POST</td><td><code>/files/{name}</code></td><td>上传文件</td></tr>
-  <tr><td>GET</td><td><code>/files/{name}</code></td><td>下载文件</td></tr>
-  <tr><td>GET</td><td><code>/health</code></td><td>健康检查（无需认证）</td></tr>
-</table>
-
-<h3><span class="badge badge-bl">Blender</span> Addon — 插件</h3>
-<p>关键设计：<strong>bpy 操作必须在主线程执行</strong>。通过 <code>queue.Queue</code> + <code>bpy.app.timers</code> 桥接后台 HTTP 线程和主线程。</p>
-<table>
-  <tr><th>模块</th><th>功能</th></tr>
-  <tr><td><code>executor.py</code></td><td>HTTP 线程调用 <code>execute_on_main_thread(code)</code>，放入队列并阻塞等待；定时器回调（100ms）在主线程取出执行</td></tr>
-  <tr><td><code>server.py</code></td><td><code>http.server.HTTPServer</code> 后台线程，绑定 <code>127.0.0.1:9876</code></td></tr>
-  <tr><td><code>capture.py</code></td><td>截图优先用 macOS <code>screencapture</code>，备选 <code>bpy.ops.screen.screenshot</code>（兼容 3.6 和 4.x）；日志通过替换 stdout/stderr 写入环形缓冲区</td></tr>
-</table>
-
-<h3><span class="badge badge-mac">Mac</span> Bridge Agent — 轮询代理</h3>
-<p>每 1 秒轮询 Relay 获取任务，根据类型调用 Blender Addon 对应端点，结果 POST 回 Relay。连接异常自动重试，不会崩溃。</p>
-
-<h3><span class="badge badge-aws">AWS</span> CLI Tool — 命令行</h3>
-<p>Claude 在 AWS 上使用的命令行工具：</p>
-<pre><code><span class="cmd">python cli.py screenshot</span>                              <span class="comment"># 截图 Blender 窗口</span>
-<span class="cmd">python cli.py exec</span> <span class="string">"bpy.data.objects.keys()"</span>           <span class="comment"># 执行 Python 代码</span>
-<span class="cmd">python cli.py exec</span> <span class="string">my_script.py</span>                        <span class="comment"># 执行脚本文件</span>
-<span class="cmd">python cli.py logs</span>                                     <span class="comment"># 查看控制台日志</span>
-<span class="cmd">python cli.py push</span> <span class="string">plugin.py</span> <span class="keyword">--dest</span> <span class="string">~/addons/</span>         <span class="comment"># 推送文件到 Mac</span></code></pre>
-
-<!-- ==================== 部署步骤 ==================== -->
-<h2>四、部署步骤</h2>
+<h3 style="margin-top:1.5rem; color:#fbbf24;">AWS 端</h3>
 
 <div class="step">
   <span class="step-num">1</span>
-  <h3>AWS — 启动 Relay Server</h3>
-  <pre><code><span class="comment"># 安装依赖</span>
-<span class="cmd">pip install</span> fastapi uvicorn pydantic
-
-<span class="comment"># 启动服务（替换密钥）</span>
-<span class="cmd">cd</span> /opt/workspace/bl/relay
-<span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">your-secret-key</span> \
-  <span class="cmd">uvicorn</span> server:app --host 0.0.0.0 --port 8080</code></pre>
-</div>
-
-<div class="step">
-  <span class="step-num">2</span>
-  <h3>Mac — 安装 Blender 插件</h3>
-  <pre><code><span class="comment"># 复制插件到 Blender 3.6 插件目录</span>
-<span class="cmd">cp -r</span> addon/blender_remote \
-  ~/Library/Application\ Support/Blender/<span class="string">3.6</span>/scripts/addons/
-
-<span class="comment"># 然后在 Blender 中：</span>
-<span class="comment"># Edit → Preferences → Add-ons → 搜索 "Remote Control" → 勾选启用</span></code></pre>
-  <div class="note">启用后 Blender 控制台会输出 <code>[Remote Control] Addon registered - server on localhost:9876</code></div>
-</div>
-
-<div class="step">
-  <span class="step-num">3</span>
-  <h3>Mac — 启动 Bridge Agent</h3>
-  <pre><code><span class="comment"># 安装依赖</span>
-<span class="cmd">pip install</span> requests
-
-<span class="comment"># 启动轮询代理（替换 AWS IP 和密钥）</span>
-<span class="cmd">cd</span> bridge
-<span class="keyword">RELAY_URL</span>=<span class="string">http://你的AWS公网IP:8080</span> \
-<span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">your-secret-key</span> \
-  <span class="cmd">python</span> bridge.py</code></pre>
-</div>
-
-<div class="step">
-  <span class="step-num">4</span>
-  <h3>AWS — 使用 CLI 控制 Blender</h3>
-  <pre><code><span class="cmd">cd</span> /opt/workspace/bl/cli
-
-<span class="comment"># 截图</span>
-<span class="cmd">python cli.py screenshot</span>
-
-<span class="comment"># 执行代码</span>
-<span class="cmd">python cli.py exec</span> <span class="string">"print(bpy.data.objects.keys())"</span>
-
-<span class="comment"># 查看日志</span>
-<span class="cmd">python cli.py logs</span>
-
-<span class="comment"># 推送插件文件到 Mac</span>
-<span class="cmd">python cli.py push</span> my_plugin.py <span class="keyword">--dest</span> <span class="string">~/blender_plugins/my_plugin.py</span></code></pre>
-</div>
-
-<!-- ==================== 快速上手 ==================== -->
-<h2>五、快速上手（复制粘贴即可）</h2>
-
-<p>以下是从零开始的完整操作命令，按顺序执行。两边的 <code>BLENDER_RELAY_API_KEY</code> 保持一致，<code>你的AWS公网IP</code> 替换为实际 IP。</p>
-
-<h3 style="margin-top:1.5rem; color:#fbbf24;">&#9654; AWS 端操作</h3>
-
-<div class="step">
-  <span class="step-num">1</span>
-  <h3>创建 conda 环境并安装依赖（首次）</h3>
-  <pre><code><span class="comment"># 创建专用 conda 环境</span>
-<span class="cmd">conda create</span> -n blender-relay python=3.12 -y
-
-<span class="comment"># 激活环境</span>
+  <h3>创建 conda 环境并安装依赖</h3>
+  <pre><code><span class="cmd">conda create</span> -n blender-relay python=3.12 -y
 <span class="cmd">conda activate</span> blender-relay
-
-<span class="comment"># 安装依赖</span>
-<span class="cmd">pip install</span> fastapi uvicorn pydantic requests mcp</code></pre>
+<span class="cmd">pip install</span> fastapi uvicorn pydantic requests mcp --root-user-action=ignore</code></pre>
 </div>
 
 <div class="step">
   <span class="step-num">2</span>
   <h3>启动 Relay Server</h3>
-  <pre><code><span class="comment"># 激活环境（如果还没激活）</span>
-<span class="cmd">conda activate</span> blender-relay
-
-<span class="comment"># 进入项目目录</span>
+  <pre><code><span class="cmd">conda activate</span> blender-relay
 <span class="cmd">cd</span> /opt/workspace/bl/relay
 
-<span class="comment"># 启动 Relay Server（后台运行）</span>
 <span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">mysecretkey</span> \
   <span class="cmd">uvicorn</span> server:app --host 0.0.0.0 --port 8080 &
 
-<span class="comment"># 确认服务正常</span>
+<span class="comment"># 验证</span>
 <span class="cmd">curl</span> http://localhost:8080/health
 <span class="comment"># 应返回 {"status":"ok","tasks":0,"files":0}</span></code></pre>
 </div>
 
-<h3 style="margin-top:2rem; color:#7dd3fc;">&#9654; Mac 端操作</h3>
-
 <div class="step">
   <span class="step-num">3</span>
+  <h3>AWS 安全组开放 8080 端口</h3>
+  <p>AWS 控制台 -> EC2 -> 安全组 -> 入站规则 -> 添加 TCP 8080</p>
+</div>
+
+<h3 style="margin-top:2rem; color:#7dd3fc;">Mac 端</h3>
+
+<div class="step">
+  <span class="step-num">4</span>
   <h3>克隆代码</h3>
   <pre><code><span class="cmd">git clone</span> git@github.com:killinux/bl.git
 <span class="cmd">cd</span> bl</code></pre>
 </div>
 
 <div class="step">
-  <span class="step-num">4</span>
-  <h3>安装 Blender 插件</h3>
-  <pre><code><span class="comment"># 复制插件到 Blender 3.6 插件目录</span>
-<span class="cmd">cp -r</span> addon/blender_remote \
-  ~/Library/Application\ Support/Blender/<span class="string">3.6</span>/scripts/addons/
-
-<span class="comment"># 然后打开 Blender：</span>
-<span class="comment"># Edit → Preferences → Add-ons → 搜索 "Remote Control" → 勾选启用</span>
-<span class="comment"># 控制台应输出: [Remote Control] Addon registered - server on localhost:9876</span></code></pre>
+  <span class="step-num">5</span>
+  <h3>安装 blender-mcp 插件</h3>
+  <ol style="color:#94a3b8; padding-left:20px; margin-top:8px;">
+    <li>前往 <a href="https://github.com/ahujasid/blender-mcp" style="color:#60a5fa">github.com/ahujasid/blender-mcp</a> 下载 <code>addon.py</code></li>
+    <li>打开 Blender -> Edit -> Preferences -> Add-ons</li>
+    <li>点击 Install，选择下载的 <code>addon.py</code> 并启用</li>
+    <li>在 3D 视图中按 <strong>N</strong> 打开侧栏，找到 <strong>BlenderMCP</strong> 面板</li>
+    <li>点击 <strong>Start MCP Server</strong>，默认监听 <code>localhost:9876</code></li>
+  </ol>
 </div>
 
 <div class="step">
-  <span class="step-num">5</span>
-  <h3>启动 Bridge Agent</h3>
-  <pre><code><span class="comment"># 安装依赖</span>
-<span class="cmd">pip install</span> requests
+  <span class="step-num">6</span>
+  <h3>安装依赖并启动 Bridge</h3>
+  <pre><code><span class="cmd">pip install</span> requests
 
-<span class="comment"># 启动 Bridge（替换 AWS IP 和密钥）</span>
 <span class="keyword">RELAY_URL</span>=<span class="string">http://你的AWS公网IP:8080</span> \
 <span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">mysecretkey</span> \
   <span class="cmd">python</span> bridge/bridge.py
 
 <span class="comment"># 看到以下输出表示连接成功：</span>
-<span class="comment"># Bridge starting - relay=http://xxx:8080 blender=http://127.0.0.1:9876</span>
-<span class="comment"># Poll interval: 1.0s</span></code></pre>
+<span class="comment"># Bridge starting - relay=http://xxx:8080 blender=127.0.0.1:9876</span></code></pre>
 </div>
 
-<h3 style="margin-top:2rem; color:#fbbf24;">&#9654; 回到 AWS 端使用</h3>
-
-<div class="step">
-  <span class="step-num">6</span>
-  <h3>用 CLI 控制 Blender</h3>
-  <pre><code><span class="cmd">cd</span> /opt/workspace/bl/cli
-
-<span class="comment"># 截取 Blender 窗口截图</span>
-<span class="cmd">python cli.py screenshot</span>
-
-<span class="comment"># 执行 Python 代码</span>
-<span class="cmd">python cli.py exec</span> <span class="string">"print(bpy.data.objects.keys())"</span>
-
-<span class="comment"># 查看 Blender 控制台日志</span>
-<span class="cmd">python cli.py logs</span>
-
-<span class="comment"># 推送文件到 Mac</span>
-<span class="cmd">python cli.py push</span> my_plugin.py <span class="keyword">--dest</span> <span class="string">~/blender_plugins/my_plugin.py</span>
-
-<span class="comment"># 执行一个 .py 脚本文件</span>
-<span class="cmd">python cli.py exec</span> my_script.py</code></pre>
-</div>
-
-<div class="note">启动顺序很重要：AWS Relay → Blender 启用插件 → Mac Bridge → AWS CLI。另外 AWS 安全组需要开放 8080 端口。</div>
-
-<!-- ==================== MCP ==================== -->
-<h2>六、MCP Server 集成（推荐）</h2>
-
-<p>将 Bridge 封装为 MCP Server 后，Claude Code 可以<strong>直接用自然语言</strong>控制 Blender，无需手动跑 CLI 命令。</p>
-
-<h3>配置方法</h3>
+<!-- ==================== 每天开工 ==================== -->
+<h2>四、每天开工（3 步）</h2>
 
 <div class="step">
   <span class="step-num">1</span>
-  <h3>安装 MCP SDK（已在 conda 环境中安装可跳过）</h3>
+  <h3>AWS — 启动 Relay</h3>
   <pre><code><span class="cmd">conda activate</span> blender-relay
-<span class="cmd">pip install</span> mcp requests</code></pre>
+<span class="cmd">cd</span> /opt/workspace/bl/relay
+<span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">mysecretkey</span> <span class="cmd">uvicorn</span> server:app --host 0.0.0.0 --port 8080 &</code></pre>
 </div>
 
 <div class="step">
   <span class="step-num">2</span>
-  <h3>配置 Claude Code</h3>
-  <p>编辑项目目录下的 <code>.claude/mcp.json</code>：</p>
-  <pre><code>{
+  <h3>Mac — 打开 Blender，启动插件</h3>
+  <p>打开 Blender -> N 面板 -> BlenderMCP -> 点 <strong>Start MCP Server</strong></p>
+</div>
+
+<div class="step">
+  <span class="step-num">3</span>
+  <h3>Mac — 启动 Bridge</h3>
+  <pre><code><span class="cmd">cd</span> ~/bl
+<span class="keyword">RELAY_URL</span>=<span class="string">http://你的AWS公网IP:8080</span> <span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">mysecretkey</span> <span class="cmd">python</span> bridge/bridge.py
+
+<span class="comment"># 或者直接用脚本：</span>
+<span class="cmd">sh</span> mac.sh</code></pre>
+</div>
+
+<p>然后在 AWS 上 <code>cd /opt/workspace/bl && claude</code> 启动 Claude Code，直接用自然语言控制 Blender。</p>
+
+<!-- ==================== MCP ==================== -->
+<h2>五、MCP Server 集成（推荐）</h2>
+
+<p>将 Bridge 封装为 MCP Server 后，Claude Code 可以<strong>直接用自然语言</strong>控制 Blender，无需手动跑 CLI。</p>
+
+<h3>配置方法</h3>
+
+<p>项目已包含 <code>.claude/mcp.json</code>，指向 conda 环境的 python：</p>
+<pre><code>{
   <span class="keyword">"mcpServers"</span>: {
     <span class="keyword">"blender-remote"</span>: {
       <span class="keyword">"command"</span>: <span class="string">"/opt/miniconda3/envs/blender-relay/bin/python"</span>,
@@ -450,195 +220,103 @@
     }
   }
 }
-<span class="comment">// 注意：command 必须用 conda 环境的 python 绝对路径</span>
-<span class="comment">// 因为 MCP Server 是由 Claude Code 启动的子进程，不会继承 conda activate</span></code></pre>
-</div>
+<span class="comment">// command 必须用 conda 环境的 python 绝对路径</span>
+<span class="comment">// MCP Server 是 Claude Code 启动的子进程，不会继承 conda activate</span></code></pre>
 
-<div class="step">
-  <span class="step-num">3</span>
-  <h3>重启 Claude Code</h3>
-  <p>重启后 Claude 自动加载 MCP 工具，直接用自然语言即可：</p>
-  <pre><code><span class="comment"># 不再需要手动跑 CLI，直接对 Claude 说：</span>
-<span class="string">"截个图看看 Blender 里什么样"</span>
-<span class="string">"列出场景里所有物体"</span>
-<span class="string">"在原点创建一个红色立方体"</span>
-<span class="string">"把 Cube 的材质改成金属质感"</span>
-<span class="string">"帮我查一下 Blender 控制台有没有报错"</span></code></pre>
-</div>
+<p>重启 Claude Code 后自动加载，直接用自然语言即可。</p>
 
 <h3>MCP 工具列表</h3>
 
 <table>
-  <tr><th>工具名</th><th>功能</th><th>对应 CLI</th></tr>
-  <tr><td><code>blender_screenshot</code></td><td>截取 Blender 视口截图</td><td><code>cli.py screenshot</code></td></tr>
-  <tr><td><code>blender_exec</code></td><td>执行任意 Python/bpy 代码</td><td><code>cli.py exec</code></td></tr>
-  <tr><td><code>blender_logs</code></td><td>获取控制台日志</td><td><code>cli.py logs</code></td></tr>
-  <tr><td><code>blender_push</code></td><td>推送文件到 Mac</td><td><code>cli.py push</code></td></tr>
-  <tr><td><code>blender_scene_info</code></td><td>获取场景所有对象信息（名称、类型、位置、材质）</td><td>—</td></tr>
-  <tr><td><code>blender_object_info</code></td><td>获取单个对象详情（顶点数、包围盒、修改器等）</td><td>—</td></tr>
+  <tr><th>工具名</th><th>功能</th></tr>
+  <tr><td><code>blender_screenshot</code></td><td>截取 Blender 视口截图</td></tr>
+  <tr><td><code>blender_exec</code></td><td>执行任意 Python/bpy 代码</td></tr>
+  <tr><td><code>blender_logs</code></td><td>获取控制台日志</td></tr>
+  <tr><td><code>blender_push</code></td><td>推送文件到 Mac</td></tr>
+  <tr><td><code>blender_scene_info</code></td><td>获取场景所有对象信息</td></tr>
+  <tr><td><code>blender_object_info</code></td><td>获取单个对象详情</td></tr>
 </table>
 
-<div class="tip">
-  <strong>MCP vs CLI：</strong>MCP 是推荐方式，Claude 自动选择合适的工具调用。CLI 作为备选，也可以在 MCP 不可用时手动使用。两者底层走同一套 Relay 通道。
-</div>
+<!-- ==================== CLI ==================== -->
+<h2>六、CLI 手动模式（备选）</h2>
 
-<!-- ==================== 使用场景 ==================== -->
-<h2>七、日常使用指南</h2>
-
-<p>以下是搭建完成后的<strong>日常使用流程</strong>和<strong>典型场景</strong>。</p>
-
-<h3>每天开工流程</h3>
-
-<div class="step">
-  <span class="step-num">1</span>
-  <h3>AWS 端 — 启动 Relay（如果没有在后台跑）</h3>
-  <pre><code><span class="cmd">conda activate</span> blender-relay
-<span class="cmd">cd</span> /opt/workspace/bl/relay
-<span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">mysecretkey</span> <span class="cmd">uvicorn</span> server:app --host 0.0.0.0 --port 8080 &</code></pre>
-</div>
-
-<div class="step">
-  <span class="step-num">2</span>
-  <h3>Mac 端 — 打开 Blender + 启动 Bridge</h3>
-  <pre><code><span class="comment"># 打开 Blender（确保 Remote Control 插件已启用）</span>
-<span class="comment"># 然后在终端启动 Bridge：</span>
-<span class="cmd">cd</span> ~/bl
-<span class="keyword">RELAY_URL</span>=<span class="string">http://你的AWS公网IP:8080</span> <span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">mysecretkey</span> <span class="cmd">python</span> bridge/bridge.py</code></pre>
-</div>
-
-<div class="step">
-  <span class="step-num">3</span>
-  <h3>AWS 端 — 打开 Claude Code，开始工作</h3>
-  <pre><code><span class="cmd">cd</span> /opt/workspace/bl
-<span class="cmd">claude</span></code></pre>
-  <p>Claude Code 会自动加载 MCP 工具，直接用自然语言和 Blender 交互。</p>
-</div>
-
-<h3>场景一：查看 Blender 状态</h3>
-
-<pre><code><span class="comment"># 对 Claude 说：</span>
-<span class="string">"截个图看看 Blender 现在什么样"</span>
-<span class="comment"># Claude 调用 blender_screenshot → 保存截图 → 显示给你看</span>
-
-<span class="string">"列出场景里所有物体的信息"</span>
-<span class="comment"># Claude 调用 blender_scene_info → 返回物体名称、位置、材质等</span>
-
-<span class="string">"看看 Cube 的详细信息"</span>
-<span class="comment"># Claude 调用 blender_object_info → 返回顶点数、包围盒、修改器等</span>
-
-<span class="string">"Blender 控制台有没有报错"</span>
-<span class="comment"># Claude 调用 blender_logs → 返回最近的控制台输出</span></code></pre>
-
-<h3>场景二：自然语言建模</h3>
-
-<pre><code><span class="comment"># 直接描述你想要的：</span>
-<span class="string">"在原点创建一个红色球体，半径 0.5"</span>
-
-<span class="comment"># Claude 会自动生成 bpy 代码并通过 blender_exec 执行：</span>
-<span class="comment"># import bpy</span>
-<span class="comment"># bpy.ops.mesh.primitive_uv_sphere_add(radius=0.5, location=(0,0,0))</span>
-<span class="comment"># mat = bpy.data.materials.new("Red")</span>
-<span class="comment"># mat.use_nodes = True</span>
-<span class="comment"># mat.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (1,0,0,1)</span>
-<span class="comment"># bpy.context.active_object.data.materials.append(mat)</span>
-
-<span class="comment"># 更多例子：</span>
-<span class="string">"创建一个 3x3 的立方体阵列，间距 2 米"</span>
-<span class="string">"给所有物体添加倒角修改器，宽度 0.02"</span>
-<span class="string">"放一盏面积光，功率 500W，暖色调"</span>
-<span class="string">"设置渲染分辨率 1920x1080，Cycles 引擎"</span></code></pre>
-
-<h3>场景三：迭代式开发</h3>
-
-<pre><code><span class="comment"># 典型循环：做 → 看 → 改 → 看</span>
-
-<span class="string">"在场景中心放一个桌子的基本形状"</span>
-<span class="comment"># Claude 执行代码创建桌子</span>
-
-<span class="string">"截个图看看"</span>
-<span class="comment"># Claude 截图，你看到效果</span>
-
-<span class="string">"桌腿太粗了，细一点，桌面加个木纹材质"</span>
-<span class="comment"># Claude 修改代码执行</span>
-
-<span class="string">"再看看"</span>
-<span class="comment"># 再截图确认效果</span></code></pre>
-
-<h3>场景四：插件开发</h3>
-
-<pre><code><span class="comment"># 让 Claude 帮你写插件：</span>
-<span class="string">"写一个 Blender 插件，在 N 面板添加一个按钮，点击后把选中物体沿法线挤出 0.1"</span>
-
-<span class="comment"># Claude 写好代码后：</span>
-<span class="string">"把这个插件推送到 Mac 上安装测试"</span>
-<span class="comment"># Claude 调用 blender_push 发送文件，然后用 blender_exec 安装注册</span>
-
-<span class="string">"截图看看 N 面板有没有出现按钮"</span>
-<span class="comment"># 截图验证</span>
-
-<span class="string">"按钮位置不对，应该在 Tool 标签下"</span>
-<span class="comment"># Claude 修改 bl_category，重新推送并热重载</span></code></pre>
-
-<h3>场景五：批量操作和排查</h3>
-
-<pre><code><span class="comment"># 手动操作很繁琐的事：</span>
-<span class="string">"把所有 Cube 开头的物体合并成一个"</span>
-<span class="string">"删除所有没有材质的物体"</span>
-<span class="string">"导出每个物体为单独的 FBX 到桌面"</span>
-
-<span class="comment"># 排查问题：</span>
-<span class="string">"分析当前场景有什么问题"</span>
-<span class="comment"># Claude 获取场景信息 + 截图，分析后告诉你：</span>
-<span class="comment"># "发现 3 个物体位置重叠、2 个物体没有材质、灯光偏暗..."</span>
-
-<span class="string">"渲染出来是黑的，帮我排查原因"</span>
-<span class="comment"># Claude 检查相机、灯光、材质、渲染设置...</span></code></pre>
-
-<h3>场景六：CLI 手动模式（备选）</h3>
-
-<p>如果 MCP 未配置或不可用，也可以直接在终端手动使用 CLI：</p>
+<p>MCP 不可用时，也可以直接在终端手动使用：</p>
 
 <pre><code><span class="cmd">cd</span> /opt/workspace/bl/cli
 
 <span class="comment"># 截图</span>
-<span class="cmd">python cli.py screenshot</span>
-<span class="comment"># 输出: Screenshot saved: /tmp/blender_screenshot_1712345678.png</span>
+<span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">mysecretkey</span> <span class="cmd">python cli.py screenshot</span>
 
-<span class="comment"># 执行代码（字符串）</span>
-<span class="cmd">python cli.py exec</span> <span class="string">"print(bpy.data.objects.keys())"</span>
-<span class="comment"># 输出: ['Camera', 'Cube', 'Light']</span>
+<span class="comment"># 执行代码</span>
+<span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">mysecretkey</span> <span class="cmd">python cli.py exec</span> <span class="string">"print(bpy.data.objects.keys())"</span>
 
-<span class="comment"># 执行代码（.py 文件）</span>
-<span class="cmd">python cli.py exec</span> my_script.py
+<span class="comment"># 执行 .py 脚本文件</span>
+<span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">mysecretkey</span> <span class="cmd">python cli.py exec</span> my_script.py
 
 <span class="comment"># 查看日志</span>
-<span class="cmd">python cli.py logs</span>
+<span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">mysecretkey</span> <span class="cmd">python cli.py logs</span>
 
 <span class="comment"># 推送文件到 Mac</span>
-<span class="cmd">python cli.py push</span> my_addon.py <span class="keyword">--dest</span> <span class="string">~/Library/Application\ Support/Blender/3.6/scripts/addons/my_addon.py</span></code></pre>
+<span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">mysecretkey</span> <span class="cmd">python cli.py push</span> my_plugin.py <span class="keyword">--dest</span> <span class="string">~/blender_plugins/my_plugin.py</span></code></pre>
 
-<!-- ==================== 安全 ==================== -->
-<h2>八、安全说明</h2>
+<!-- ==================== 使用场景 ==================== -->
+<h2>七、使用场景</h2>
+
+<h3>查看 Blender 状态</h3>
+<pre><code><span class="string">"截个图看看 Blender 现在什么样"</span>
+<span class="string">"列出场景里所有物体"</span>
+<span class="string">"看看 Cube 的详细信息"</span></code></pre>
+
+<h3>自然语言建模</h3>
+<pre><code><span class="string">"在原点创建一个红色球体，半径 0.5"</span>
+<span class="string">"创建一个 3x3 的立方体阵列，间距 2 米"</span>
+<span class="string">"给所有物体添加倒角修改器，宽度 0.02"</span>
+<span class="string">"放一盏面积光，功率 500W，暖色调"</span></code></pre>
+
+<h3>迭代式开发</h3>
+<pre><code><span class="comment"># 做 -> 看 -> 改 -> 看</span>
+<span class="string">"在场景中心放一个桌子的基本形状"</span>
+<span class="string">"截个图看看"</span>
+<span class="string">"桌腿太粗了，细一点，桌面加个木纹材质"</span>
+<span class="string">"再看看"</span></code></pre>
+
+<h3>插件开发</h3>
+<pre><code><span class="string">"写一个 Blender 插件，在 N 面板添加按钮，点击后把选中物体沿法线挤出"</span>
+<span class="string">"把这个插件推送到 Mac 上安装测试"</span>
+<span class="string">"截图看看 N 面板有没有出现按钮"</span></code></pre>
+
+<h3>批量操作和排查</h3>
+<pre><code><span class="string">"把所有 Cube 开头的物体合并成一个"</span>
+<span class="string">"分析当前场景有什么问题"</span>
+<span class="string">"渲染出来是黑的，帮我排查原因"</span></code></pre>
+
+<!-- ==================== Relay API ==================== -->
+<h2>八、Relay Server API</h2>
 
 <table>
-  <tr><th>项目</th><th>措施</th></tr>
-  <tr><td>认证</td><td>所有端点（除 /health）通过 <code>X-API-Key</code> Header 认证，密钥通过环境变量 <code>BLENDER_RELAY_API_KEY</code> 设置</td></tr>
-  <tr><td>Blender Addon</td><td>HTTP 服务仅绑定 <code>127.0.0.1</code>，不暴露到网络</td></tr>
-  <tr><td>传输加密</td><td>建议 Relay 前加 nginx 反代配 HTTPS，或 uvicorn 直接配 SSL 证书</td></tr>
-  <tr><td>代码执行</td><td><code>/exec</code> 端点可执行任意 Python，仅用于开发环境，API Key 防止未授权访问</td></tr>
+  <tr><th>方法</th><th>端点</th><th>用途</th></tr>
+  <tr><td>POST</td><td><code>/tasks</code></td><td>创建任务</td></tr>
+  <tr><td>GET</td><td><code>/tasks/pending</code></td><td>Bridge 轮询获取待执行任务</td></tr>
+  <tr><td>POST</td><td><code>/tasks/{id}/result</code></td><td>Bridge 提交执行结果</td></tr>
+  <tr><td>GET</td><td><code>/tasks/{id}/result?wait=N</code></td><td>CLI 长轮询等待结果</td></tr>
+  <tr><td>POST</td><td><code>/files/{name}</code></td><td>上传文件</td></tr>
+  <tr><td>GET</td><td><code>/files/{name}</code></td><td>下载文件</td></tr>
+  <tr><td>GET</td><td><code>/health</code></td><td>健康检查（无需认证）</td></tr>
 </table>
+
+<p>所有端点（除 /health）通过 <code>X-API-Key</code> Header 认证。内存存储，任务 5 分钟过期自动清理。</p>
 
 <!-- ==================== 故障排除 ==================== -->
 <h2>九、故障排除</h2>
 
 <table>
   <tr><th>问题</th><th>排查方式</th></tr>
-  <tr><td>Bridge 连不上 Relay</td><td>检查 AWS 安全组是否开放 8080 端口；检查 <code>RELAY_URL</code> 是否正确</td></tr>
-  <tr><td>Bridge 报 <code>Blender addon not reachable</code></td><td>确认 Blender 已启动且插件已启用；检查 <code>localhost:9876</code> 是否可达</td></tr>
-  <tr><td>截图超时</td><td>macOS 首次使用 <code>screencapture</code> 可能需要授予屏幕录制权限：系统设置 → 隐私与安全性 → 屏幕录制</td></tr>
-  <tr><td>脚本执行无响应</td><td>脚本可能阻塞了 Blender 主线程，默认 30 秒超时；检查 Blender 控制台输出</td></tr>
-  <tr><td>CLI 一直等待</td><td>确认 Bridge 正在运行；检查 Relay <code>/health</code> 端点查看任务数</td></tr>
-  <tr><td>API Key 错误</td><td>确认 AWS 和 Mac 两端环境变量 <code>BLENDER_RELAY_API_KEY</code> 一致</td></tr>
+  <tr><td>CLI 报 401 Unauthorized</td><td>CLI 和 Relay 的 <code>BLENDER_RELAY_API_KEY</code> 不一致</td></tr>
+  <tr><td>Bridge 连不上 Relay</td><td>检查 AWS 安全组是否开放 8080 端口；Mac 上 <code>curl http://AWS_IP:8080/health</code> 测试</td></tr>
+  <tr><td>Bridge 报 Blender addon not reachable</td><td>确认 Blender 已启动且 blender-mcp 插件已点击 Start MCP Server</td></tr>
+  <tr><td>任务一直 204 No Content</td><td>Bridge 没有在运行，或 Bridge 连不上 Relay/Blender</td></tr>
+  <tr><td>截图超时</td><td>macOS 首次需要授予屏幕录制权限：系统设置 -> 隐私与安全性 -> 屏幕录制</td></tr>
+  <tr><td>脚本执行无响应</td><td>脚本可能阻塞了 Blender 主线程，默认 30 秒超时</td></tr>
 </table>
 
 <!-- ==================== 环境变量 ==================== -->
@@ -646,15 +324,16 @@
 
 <table>
   <tr><th>变量名</th><th>用于</th><th>默认值</th><th>说明</th></tr>
-  <tr><td><code>BLENDER_RELAY_API_KEY</code></td><td>全部</td><td><code>dev-key-change-me</code></td><td>共享 API 密钥</td></tr>
-  <tr><td><code>RELAY_URL</code></td><td>Bridge / CLI</td><td><code>http://localhost:8080</code></td><td>Relay 服务器地址</td></tr>
-  <tr><td><code>BLENDER_ADDON_URL</code></td><td>Bridge</td><td><code>http://127.0.0.1:9876</code></td><td>Blender Addon 地址</td></tr>
+  <tr><td><code>BLENDER_RELAY_API_KEY</code></td><td>全部组件</td><td><code>dev-key-change-me</code></td><td>共享 API 密钥，两端必须一致</td></tr>
+  <tr><td><code>RELAY_URL</code></td><td>Bridge / CLI / MCP</td><td><code>http://localhost:8080</code></td><td>Relay 服务器地址</td></tr>
+  <tr><td><code>BLENDER_HOST</code></td><td>Bridge</td><td><code>127.0.0.1</code></td><td>blender-mcp 插件地址</td></tr>
+  <tr><td><code>BLENDER_PORT</code></td><td>Bridge</td><td><code>9876</code></td><td>blender-mcp 插件端口</td></tr>
   <tr><td><code>POLL_INTERVAL</code></td><td>Bridge</td><td><code>1.0</code></td><td>轮询间隔（秒）</td></tr>
 </table>
 
-<p style="margin-top: 3rem; color: #475569; text-align: center; font-size: 0.85rem;">
-  Blender Remote Bridge v1.0 — 适用于 Blender 3.6+
-</p>
+<footer>
+  Blender Remote Bridge v1.1 -- 基于 blender-mcp 插件，适用于 Blender 3.6+
+</footer>
 
 </div>
 </body>
