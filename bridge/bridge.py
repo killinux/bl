@@ -83,11 +83,25 @@ def submit_result(task_id: str, result: dict):
 
 def dispatch_screenshot() -> dict:
     """Request viewport screenshot from blender-mcp addon."""
-    result = send_to_blender({"type": "get_viewport_screenshot", "params": {}})
-    # Adapt response format: blender-mcp returns image data directly
+    import tempfile
+    import base64
+
+    # blender-mcp requires a filepath param, saves screenshot to that file
+    tmp_path = os.path.join(tempfile.gettempdir(), "blender_screenshot.png")
+    result = send_to_blender({
+        "type": "get_viewport_screenshot",
+        "params": {"filepath": tmp_path}
+    })
     if "error" in result:
         return {"status": "error", "error": result["error"]}
-    return {"status": "ok", "image": result.get("image", "")}
+
+    # Read the saved file and return as base64
+    if os.path.isfile(tmp_path) and os.path.getsize(tmp_path) > 0:
+        with open(tmp_path, "rb") as f:
+            image_b64 = base64.b64encode(f.read()).decode()
+        return {"status": "ok", "image": image_b64}
+    else:
+        return {"status": "error", "error": "Screenshot file not created"}
 
 
 def dispatch_exec(code: str) -> dict:
