@@ -2,7 +2,7 @@
   "mcpServers": {
     "blender-remote": {
       "command": "/opt/miniconda3/envs/blender-relay/bin/python",
-      "args": ["/opt/workspace/bl/mcp/blender_mcp_server.py"],
+      "args": ["/opt/workspace/mytest/bl/mcp/blender_mcp_server.py"],
       "env": {
         "RELAY_URL": "http://localhost:8080",
         "BLENDER_RELAY_API_KEY": "dev-key-change-me"

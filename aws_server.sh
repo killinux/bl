@@ -2,7 +2,7 @@
 # AWS Relay Server startup script
 # Usage: sh aws_server.sh [start|stop|status|log]
 
-LOG_DIR="/opt/workspace/bl/log"
+LOG_DIR="/opt/workspace/mytest/bl/log"
 LOG_FILE="$LOG_DIR/relay.log"
 PID_FILE="$LOG_DIR/relay.pid"
 PORT=8080
@@ -26,7 +26,7 @@ start() {
     echo "Starting Relay Server on port $PORT..."
     echo "Log: $LOG_FILE"
 
-    cd /opt/workspace/bl/relay
+    cd /opt/workspace/mytest/bl/relay
     BLENDER_RELAY_API_KEY="$API_KEY" \
         nohup uvicorn server:app --host 0.0.0.0 --port $PORT \
         >> "$LOG_FILE" 2>&1 &
