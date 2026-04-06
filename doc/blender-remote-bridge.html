@@ -263,8 +263,55 @@
 <span class="comment"># 推送文件到 Mac</span>
 <span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">mysecretkey</span> <span class="cmd">python cli.py push</span> my_plugin.py <span class="keyword">--dest</span> <span class="string">~/blender_plugins/my_plugin.py</span></code></pre>
 
+<!-- ==================== 斜杠命令 ==================== -->
+<h2>七、斜杠命令（Slash Commands）</h2>
+
+<p>项目内置了 5 个自定义斜杠命令，在 Claude Code 中输入 <code>/</code> 即可看到。<strong>新用户 clone 仓库后直接可用，无需额外安装。</strong></p>
+
+<table>
+  <tr><th>命令</th><th>功能</th><th>说明</th></tr>
+  <tr><td><code>/blender-setup</code></td><td>首次搭建引导</td><td>引导完成 AWS + Mac 全部配置</td></tr>
+  <tr><td><code>/blender-connect</code></td><td>检查连接状态</td><td>自动检测 Relay 是否在跑，测试连通性</td></tr>
+  <tr><td><code>/blender-screenshot</code></td><td>截取视口截图</td><td>截图并显示 Blender 当前画面</td></tr>
+  <tr><td><code>/blender-exec &lt;代码&gt;</code></td><td>执行 Python 代码</td><td>在 Blender 里执行 bpy 代码，也支持 .py 文件</td></tr>
+  <tr><td><code>/blender-push &lt;文件&gt;</code></td><td>推送文件到 Mac</td><td>发送文件到 Mac 的指定路径</td></tr>
+</table>
+
+<h3>新用户快速开始</h3>
+
+<pre><code><span class="comment"># 1. 克隆仓库</span>
+<span class="cmd">git clone</span> git@github.com:killinux/bl.git
+<span class="cmd">cd</span> bl
+
+<span class="comment"># 2. 启动 Claude Code</span>
+<span class="cmd">claude</span>
+
+<span class="comment"># 3. 输入斜杠命令，跟着引导走</span>
+<span class="cmd">/blender-setup</span></code></pre>
+
+<h3>日常使用</h3>
+
+<pre><code><span class="comment"># 检查连接</span>
+<span class="cmd">/blender-connect</span>
+
+<span class="comment"># 截图看看</span>
+<span class="cmd">/blender-screenshot</span>
+
+<span class="comment"># 执行代码</span>
+<span class="cmd">/blender-exec</span> print(bpy.data.objects.keys())
+
+<span class="comment"># 推送插件文件到 Mac</span>
+<span class="cmd">/blender-push</span> my_addon.py --dest ~/addons/my_addon.py
+
+<span class="comment"># 或者直接用自然语言（通过 MCP）</span>
+<span class="string">"在场景里创建一个红色球体"</span></code></pre>
+
+<div class="tip">
+  <strong>斜杠命令 vs MCP vs CLI：</strong>三种方式都能控制 Blender。斜杠命令最方便（直接 <code>/blender-screenshot</code>）；MCP 最自然（直接说话）；CLI 是底层备选。
+</div>
+
 <!-- ==================== 使用场景 ==================== -->
-<h2>七、使用场景</h2>
+<h2>八、使用场景</h2>
 
 <h3>查看 Blender 状态</h3>
 <pre><code><span class="string">"截个图看看 Blender 现在什么样"</span>
@@ -295,7 +342,7 @@
 <span class="string">"渲染出来是黑的，帮我排查原因"</span></code></pre>
 
 <!-- ==================== Relay API ==================== -->
-<h2>八、Relay Server API</h2>
+<h2>九、Relay Server API</h2>
 
 <table>
   <tr><th>方法</th><th>端点</th><th>用途</th></tr>
@@ -311,7 +358,7 @@
 <p>所有端点（除 /health）通过 <code>X-API-Key</code> Header 认证。内存存储，任务 5 分钟过期自动清理。</p>
 
 <!-- ==================== 脚本 ==================== -->
-<h2>九、启动脚本说明</h2>
+<h2>十、启动脚本说明</h2>
 
 <h3>aws_server.sh（AWS 端）</h3>
 
@@ -339,7 +386,7 @@ PID 文件：<code>/opt/workspace/bl/log/relay.pid</code></p>
 <p>如需修改 AWS IP 或 API Key，编辑 <code>mac.sh</code> 文件。</p>
 
 <!-- ==================== 故障排除 ==================== -->
-<h2>十、故障排除</h2>
+<h2>十一、故障排除</h2>
 
 <table>
   <tr><th>问题</th><th>排查方式</th></tr>
@@ -352,7 +399,7 @@ PID 文件：<code>/opt/workspace/bl/log/relay.pid</code></p>
 </table>
 
 <!-- ==================== 环境变量 ==================== -->
-<h2>十一、环境变量汇总</h2>
+<h2>十二、环境变量汇总</h2>
 
 <table>
   <tr><th>变量名</th><th>用于</th><th>默认值</th><th>说明</th></tr>
