@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blender + AI 行业调研报告</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    line-height: 1.8;
+    padding: 2rem 1rem;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+
+  header { text-align: center; margin-bottom: 3rem; }
+  header .tag { display: inline-block; background: linear-gradient(135deg, #6366f1, #ec4899); color: #fff; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 14px; border-radius: 20px; margin-bottom: 12px; }
+  header h1 { font-size: 2.2rem; font-weight: 800; background: linear-gradient(135deg, #a78bfa, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+  header .subtitle { color: #64748b; font-size: 0.95rem; }
+  header .date { color: #475569; font-size: 0.82rem; margin-top: 8px; }
+
+  h2 { font-size: 1.5rem; color: #7dd3fc; margin: 2.8rem 0 1rem; padding-left: 0.5rem; border-left: 4px solid #0ea5e9; }
+  h3 { font-size: 1.15rem; color: #bae6fd; margin: 1.8rem 0 0.6rem; }
+  h4 { font-size: 1rem; color: #94a3b8; margin: 1.2rem 0 0.4rem; }
+  p { margin: 0.6rem 0; color: #cbd5e1; }
+  a { color: #60a5fa; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  strong { color: #e2e8f0; }
+
+  pre { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 1rem 1.2rem; overflow-x: auto; margin: 0.8rem 0; font-size: 0.88rem; line-height: 1.6; }
+  code { font-family: "JetBrains Mono", "Fira Code", monospace; color: #a5f3fc; font-size: 0.88rem; }
+  pre code { color: #e2e8f0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+  th { background: #1e3a5f; color: #7dd3fc; text-align: left; padding: 0.7rem 1rem; border: 1px solid #334155; font-weight: 600; }
+  td { padding: 0.6rem 1rem; border: 1px solid #334155; color: #cbd5e1; }
+  tr:nth-child(even) td { background: #1e293b; }
+
+  .card { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 1.2rem 1.5rem; margin: 1rem 0; }
+  .card h4 { margin-top: 0; color: #e2e8f0; }
+  .card .meta { font-size: 0.82rem; color: #64748b; margin-bottom: 0.5rem; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1rem 0; }
+  @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .good { border-left: 3px solid #34d399; padding-left: 12px; margin: 0.5rem 0; color: #86efac; }
+  .bad { border-left: 3px solid #f87171; padding-left: 12px; margin: 0.5rem 0; color: #fca5a5; }
+  .neutral { border-left: 3px solid #fbbf24; padding-left: 12px; margin: 0.5rem 0; color: #fde68a; }
+
+  .badge { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 4px; font-size: 0.78rem; font-weight: 600; margin-right: 0.3rem; }
+  .badge-green { background: #10b98120; color: #34d399; border: 1px solid #10b98140; }
+  .badge-blue { background: #3b82f620; color: #60a5fa; border: 1px solid #3b82f640; }
+  .badge-purple { background: #8b5cf620; color: #a78bfa; border: 1px solid #8b5cf640; }
+  .badge-orange { background: #f59e0b20; color: #fbbf24; border: 1px solid #f59e0b40; }
+  .badge-red { background: #ef444420; color: #f87171; border: 1px solid #ef444440; }
+
+  .tip { background: #172554; border: 1px solid #1e3a5f; border-radius: 6px; padding: 0.8rem 1rem; margin: 1rem 0; color: #93c5fd; font-size: 0.88rem; }
+
+  .arch { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 1.5rem; margin: 1rem 0; text-align: center; }
+  .arch pre { display: inline-block; text-align: left; border: none; background: none; padding: 0; font-size: 0.82rem; color: #94a3b8; }
+
+  .score { display: inline-flex; align-items: center; gap: 4px; }
+  .star { color: #fbbf24; }
+  .star-empty { color: #334155; }
+
+  ol, ul { padding-left: 1.5rem; color: #cbd5e1; margin: 0.5rem 0; }
+  li { margin: 0.4rem 0; }
+
+  .toc { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+  .toc h3 { margin-top: 0; color: #7dd3fc; }
+  .toc ol { color: #94a3b8; }
+  .toc a { color: #94a3b8; }
+  .toc a:hover { color: #e2e8f0; }
+
+  footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #1e293b; text-align: center; color: #334155; font-size: 0.82rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="tag">Research Report</div>
+  <h1>Blender + AI 集成方案调研报告</h1>
+  <p class="subtitle">聚焦 Claude Code 与 Blender 的连接方案、行业实践与最佳策略</p>
+  <p class="date">2026-04-06</p>
+</header>
+
+<!-- TOC -->
+<div class="toc">
+  <h3>目录</h3>
+  <ol>
+    <li><a href="#bg">背景与动机</a></li>
+    <li><a href="#landscape">现有方案全景</a></li>
+    <li><a href="#blender-mcp">blender-mcp 深度分析</a></li>
+    <li><a href="#compare">方案对比评估</a></li>
+    <li><a href="#workflows">主流工作流</a></li>
+    <li><a href="#best">最佳实践</a></li>
+    <li><a href="#pitfalls">常见陷阱</a></li>
+    <li><a href="#ours">我们的方案定位</a></li>
+    <li><a href="#future">未来演进方向</a></li>
+    <li><a href="#conclusion">结论</a></li>
+  </ol>
+</div>
+
+<!-- ==================== 1 背景 ==================== -->
+<h2 id="bg">一、背景与动机</h2>
+
+<p>Blender 是开源 3D 创作套件，内置完整的 Python API（<code>bpy</code>），使得程序化控制成为可能。随着大语言模型的发展，业界开始探索用 AI 辅助 3D 工作流 —— 从自然语言生成场景到自动化渲染管线。</p>
+
+<p>核心诉求包括：</p>
+<ul>
+  <li><strong>插件开发辅助</strong> —— 让 AI 帮写 Blender 插件的样板代码和业务逻辑</li>
+  <li><strong>场景快速原型</strong> —— 用自然语言描述场景，AI 生成对应的 bpy 代码</li>
+  <li><strong>批量自动化</strong> —— 重命名、导出、渲染等重复操作</li>
+  <li><strong>调试排错</strong> —— 把报错贴给 AI，快速定位问题</li>
+</ul>
+
+<!-- ==================== 2 方案全景 ==================== -->
+<h2 id="landscape">二、现有方案全景</h2>
+
+<div class="card">
+  <h4>1. blender-mcp <span class="badge badge-green">主流</span></h4>
+  <div class="meta">github.com/ahujasid/blender-mcp &middot; 2000+ Stars &middot; MCP 协议</div>
+  <p>通过 MCP 协议连接 Claude Desktop / Cursor 等客户端与 Blender，支持场景查询、代码执行、资产库集成、AI 3D 生成。</p>
+  <div class="arch">
+    <pre>Claude Desktop ── MCP ──> blender-mcp server ── Socket ──> Blender addon (:9876)</pre>
+  </div>
+</div>
+
+<div class="card">
+  <h4>2. BlenderGPT <span class="badge badge-orange">经典</span></h4>
+  <div class="meta">github.com/gd3kr/BlenderGPT &middot; 5000+ Stars &middot; OpenAI API</div>
+  <p>Blender 内置面板，用户输入自然语言，直接调用 OpenAI GPT-4 API 生成 bpy 代码并执行。最早的 Blender+AI 项目之一，简单直接但仅支持 OpenAI。</p>
+</div>
+
+<div class="card">
+  <h4>3. Headless 模式 <span class="badge badge-blue">稳定</span></h4>
+  <div class="meta">Blender 原生 &middot; 无需额外组件</div>
+  <p>Claude Code 写 Python 脚本，通过 <code>blender --background --python script.py</code> 执行。不需要任何桥接，最稳定，适合 CI/CD 和批量任务。</p>
+  <pre><code># Claude Code 写好脚本后
+blender --background scene.blend --python render_script.py -- --output /tmp/render.png</code></pre>
+</div>
+
+<div class="card">
+  <h4>4. 自定义 REST/WebSocket 桥接 <span class="badge badge-purple">定制</span></h4>
+  <div class="meta">各工作室自研</div>
+  <p>在 Blender 内运行 Flask/FastAPI 服务，暴露 REST API。灵活度高，可针对工作室需求定制，但需要自行开发维护。</p>
+</div>
+
+<div class="card">
+  <h4>5. 我们的 Remote Bridge <span class="badge badge-green">跨网络</span></h4>
+  <div class="meta">本项目 &middot; Relay 中转 + blender-mcp Socket</div>
+  <p>解决 Claude Code 在 AWS、Blender 在公司内网 Mac 的场景。Mac 主动轮询 AWS，通过 blender-mcp 插件的 Socket 接口控制 Blender。</p>
+  <div class="arch">
+    <pre>Claude Code (AWS) ── HTTP ──> Relay Server (:8080) <── poll ── Bridge (Mac) ── TCP ──> blender-mcp (:9876)</pre>
+  </div>
+</div>
+
+<!-- ==================== 3 blender-mcp ==================== -->
+<h2 id="blender-mcp">三、blender-mcp 深度分析</h2>
+
+<h3>3.1 API 能力（22 个工具）</h3>
+
+<table>
+  <tr><th>分类</th><th>数量</th><th>核心 API</th></tr>
+  <tr><td>基础操作</td><td>4</td><td><code>execute_code</code>、<code>get_scene_info</code>、<code>get_object_info</code>、<code>get_viewport_screenshot</code></td></tr>
+  <tr><td>PolyHaven 资产库</td><td>5</td><td>搜索/下载免费 HDR、材质、模型</td></tr>
+  <tr><td>Sketchfab 模型库</td><td>4</td><td>搜索/预览/下载 3D 模型</td></tr>
+  <tr><td>Hyper3D Rodin</td><td>5</td><td>文字/图片生成 3D 模型（AI）</td></tr>
+  <tr><td>Hunyuan3D (腾讯)</td><td>4</td><td>文字/图片生成 3D 模型（AI）</td></tr>
+</table>
+
+<p><strong>关键发现：</strong>实际上核心就是 <code>execute_code</code>，其他所有操作（创建物体、改材质、灯光、渲染）都是通过它执行 bpy 代码。没有专门的高层 API。</p>
+
+<h3>3.2 通信协议</h3>
+
+<table>
+  <tr><th>层</th><th>协议</th><th>说明</th></tr>
+  <tr><td>AI 客户端 ↔ MCP Server</td><td>MCP (stdio)</td><td>标准 MCP 协议，通过 npx/uvx 启动</td></tr>
+  <tr><td>MCP Server ↔ Blender Addon</td><td>TCP Socket</td><td>JSON 消息，端口 9876，localhost</td></tr>
+</table>
+
+<p>Socket 消息格式：</p>
+<pre><code>// 发送
+{"type": "execute_code", "params": {"code": "import bpy; print(bpy.data.objects.keys())"}}
+
+// 接收
+{"executed": true, "result": "['Camera', 'Cube', 'Light']\n"}</code></pre>
+
+<h3>3.3 优势与局限</h3>
+
+<div class="grid-2">
+  <div>
+    <h4 style="color:#34d399">优势</h4>
+    <div class="good">设置简单，一条命令安装</div>
+    <div class="good">MCP 原生集成，自然语言交互</div>
+    <div class="good">资产库集成（PolyHaven、Sketchfab）</div>
+    <div class="good">AI 3D 生成（Hyper3D、Hunyuan3D）</div>
+    <div class="good">社区活跃，2000+ Stars</div>
+  </div>
+  <div>
+    <h4 style="color:#f87171">局限</h4>
+    <div class="bad">必须同一台机器（localhost Socket）</div>
+    <div class="bad">截图需传 filepath，不直接返回图片</div>
+    <div class="bad">无 undo 集成，出错需手动清理</div>
+    <div class="bad">复杂场景需大量来回交互</div>
+    <div class="bad">AI 无空间推理能力，不知道物体实际位置关系</div>
+  </div>
+</div>
+
+<!-- ==================== 4 方案对比 ==================== -->
+<h2 id="compare">四、方案对比评估</h2>
+
+<table>
+  <tr>
+    <th>维度</th>
+    <th>blender-mcp</th>
+    <th>BlenderGPT</th>
+    <th>Headless</th>
+    <th>我们的 Bridge</th>
+  </tr>
+  <tr>
+    <td>网络要求</td>
+    <td>同一机器</td>
+    <td>需要外网（调 API）</td>
+    <td>无</td>
+    <td><strong>可跨网络</strong></td>
+  </tr>
+  <tr>
+    <td>AI 客户端</td>
+    <td>Claude Desktop / Cursor</td>
+    <td>仅 OpenAI</td>
+    <td>任意（写脚本）</td>
+    <td><strong>Claude Code CLI</strong></td>
+  </tr>
+  <tr>
+    <td>视觉反馈</td>
+    <td>有（截图 API）</td>
+    <td>无</td>
+    <td>可渲染图片</td>
+    <td><strong>有（截图传回）</strong></td>
+  </tr>
+  <tr>
+    <td>实时交互</td>
+    <td>是</td>
+    <td>是</td>
+    <td>否（批处理）</td>
+    <td>是（1-3 秒延迟）</td>
+  </tr>
+  <tr>
+    <td>安装复杂度</td>
+    <td>低</td>
+    <td>低</td>
+    <td>无</td>
+    <td>中</td>
+  </tr>
+  <tr>
+    <td>资产库集成</td>
+    <td>PolyHaven + Sketchfab</td>
+    <td>无</td>
+    <td>无</td>
+    <td>通过 execute_code 间接</td>
+  </tr>
+  <tr>
+    <td>适用场景</td>
+    <td>本地开发</td>
+    <td>本地开发</td>
+    <td>CI/CD、批量</td>
+    <td><strong>远程 + 防火墙穿透</strong></td>
+  </tr>
+</table>
+
+<!-- ==================== 5 工作流 ==================== -->
+<h2 id="workflows">五、主流工作流</h2>
+
+<h3>5.1 插件/脚本开发（最实用）</h3>
+<p class="good"><strong>推荐指数：</strong><span class="score"><span class="star">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span></p>
+<p>Claude Code 写 Blender 插件代码（<code>bl_info</code>、Operator、Panel），用户安装到 Blender 里测试，迭代修改。这是最可靠的工作流，因为 Claude 写的是文件而非实时执行。</p>
+<pre><code># 典型流程
+1. 告诉 Claude 插件需求
+2. Claude 写出 .py 插件文件
+3. 推送到 Mac（cli.py push）
+4. Blender 里安装并测试
+5. 截图看效果 → 反馈 → 迭代</code></pre>
+
+<h3>5.2 场景快速原型</h3>
+<p class="neutral"><strong>推荐指数：</strong><span class="score"><span class="star">&#9733;&#9733;&#9733;&#9733;</span><span class="star-empty">&#9733;</span></span></p>
+<p>用自然语言描述场景，AI 生成 bpy 代码创建物体、材质、灯光。适合打草稿和概念验证，不适合最终生产级模型。</p>
+<pre><code>"创建一个室内场景：一个房间，中间放一张桌子，四把椅子围着桌子，天花板上一盏暖色吊灯"</code></pre>
+
+<h3>5.3 批量自动化</h3>
+<p class="good"><strong>推荐指数：</strong><span class="score"><span class="star">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span></p>
+<p>重命名所有物体、批量应用修改器、统一导出格式、批量渲染等。AI 生成脚本后一次性执行，效率极高。</p>
+
+<h3>5.4 材质/Shader 开发</h3>
+<p class="bad"><strong>推荐指数：</strong><span class="score"><span class="star">&#9733;&#9733;</span><span class="star-empty">&#9733;&#9733;&#9733;</span></span></p>
+<p>用代码创建节点树极其冗长（每个节点要设位置、参数、连线），简单材质可以，复杂节点树手动搭更快。</p>
+
+<h3>5.5 调试排错</h3>
+<p class="good"><strong>推荐指数：</strong><span class="score"><span class="star">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span></p>
+<p>把 Blender 控制台报错贴给 Claude，快速定位问题原因。也可以让 Claude 分析场景状态（物体重叠、缺失材质等）。</p>
+
+<h3>5.6 渲染管线</h3>
+<p class="good"><strong>推荐指数：</strong><span class="score"><span class="star">&#9733;&#9733;&#9733;&#9733;</span><span class="star-empty">&#9733;</span></span></p>
+<p>配置 Cycles/EEVEE 参数、设置渲染层、管理输出路径。适合 headless 模式批量渲染。</p>
+
+<!-- ==================== 6 最佳实践 ==================== -->
+<h2 id="best">六、最佳实践</h2>
+
+<h3>6.1 小步迭代</h3>
+<p>一次让 AI 做一件事，完成后截图确认，再做下一步。不要一句话要求整个复杂场景。</p>
+<pre><code># 好的做法
+"先创建一个立方体" → 截图 → "把它变成桌子形状" → 截图 → "加一个木纹材质"
+
+# 不好的做法
+"创建一个完整的客厅场景，包含沙发、茶几、电视柜、地毯、台灯、窗帘和室内光照"</code></pre>
+
+<h3>6.2 截图驱动开发</h3>
+<p>每次操作后截图，让 Claude 看到效果。这是我们 Bridge 方案的核心优势，弥补了 AI 缺乏空间推理的短板。</p>
+<pre><code>做 → 截图 → 看 → 改 → 截图 → 确认</code></pre>
+
+<h3>6.3 版本声明</h3>
+<p>告诉 Claude 你用的 Blender 版本。3.x 和 4.x 的 API 有显著差异：</p>
+<ul>
+  <li>4.x 使用 <code>bpy.context.temp_override()</code>，3.x 使用 <code>context.copy()</code></li>
+  <li>部分操作符参数有变化</li>
+  <li>节点树 API 有细微调整</li>
+</ul>
+
+<h3>6.4 先审后跑</h3>
+<p>执行前审查生成的代码，尤其是涉及删除、修改现有物体的操作。blender-mcp 没有 undo 集成。</p>
+
+<h3>6.5 利用 Headless 模式</h3>
+<p>对于不需要实时交互的任务（批量渲染、文件转换），直接用 <code>blender --background --python</code> 更稳定高效。</p>
+
+<h3>6.6 安装类型提示</h3>
+<p>安装 <a href="https://github.com/nutti/fake-bpy-module">fake-bpy-module</a> 让 Claude 写代码时有更好的 API 感知：</p>
+<pre><code>pip install fake-bpy-module-3.6</code></pre>
+
+<!-- ==================== 7 陷阱 ==================== -->
+<h2 id="pitfalls">七、常见陷阱</h2>
+
+<table>
+  <tr><th>陷阱</th><th>说明</th><th>建议</th></tr>
+  <tr>
+    <td><span class="badge badge-red">空间推理</span></td>
+    <td>AI 不知道物体是否重叠、悬浮、穿模</td>
+    <td>每步截图确认，手动调整位置</td>
+  </tr>
+  <tr>
+    <td><span class="badge badge-red">精细建模</span></td>
+    <td>顶点级操作靠自然语言不靠谱</td>
+    <td>用 Blender 原生工具手动建模</td>
+  </tr>
+  <tr>
+    <td><span class="badge badge-red">版本差异</span></td>
+    <td>AI 可能生成旧版 API 调用</td>
+    <td>在 CLAUDE.md 中声明 Blender 版本</td>
+  </tr>
+  <tr>
+    <td><span class="badge badge-orange">节点坐标</span></td>
+    <td>AI 创建的节点树节点位置重叠</td>
+    <td>手动加 <code>node.location = (x, y)</code></td>
+  </tr>
+  <tr>
+    <td><span class="badge badge-orange">无 Undo</span></td>
+    <td>MCP 执行的操作无法 Ctrl+Z</td>
+    <td>操作前保存 .blend 文件</td>
+  </tr>
+  <tr>
+    <td><span class="badge badge-orange">大场景性能</span></td>
+    <td>get_scene_info 在大场景下数据量大</td>
+    <td>blender-mcp 默认限制 10 个物体</td>
+  </tr>
+  <tr>
+    <td><span class="badge badge-orange">UV/绑骨/物理</span></td>
+    <td>需要视觉反馈和反复调试</td>
+    <td>手动操作，AI 仅辅助写脚本</td>
+  </tr>
+</table>
+
+<!-- ==================== 8 我们的方案 ==================== -->
+<h2 id="ours">八、我们的方案定位</h2>
+
+<h3>8.1 解决了什么问题</h3>
+
+<p>行业现有方案（blender-mcp、BlenderGPT）都假设 AI 客户端和 Blender 在<strong>同一台机器</strong>上。我们的场景是：</p>
+
+<ul>
+  <li>Claude Code 运行在 <strong>AWS 云服务器</strong></li>
+  <li>Blender 运行在<strong>公司内网 Mac</strong>，无公网 IP，防火墙禁止入站连接</li>
+  <li>Mac 可以发出 HTTP 请求（可以上网）</li>
+</ul>
+
+<p>通过 <strong>Relay 中转 + Mac 主动轮询</strong> 的"拉模式"，绕过防火墙限制。</p>
+
+<h3>8.2 相比行业方案的差异化优势</h3>
+
+<div class="grid-2">
+  <div class="card">
+    <h4 style="color:#34d399">1. 跨网络</h4>
+    <p>唯一支持 AI 和 Blender 在不同网络的方案。不需要 VPN、SSH 隧道、Tailscale 等工具。</p>
+  </div>
+  <div class="card">
+    <h4 style="color:#34d399">2. 视觉反馈回路</h4>
+    <p>截图传回 AWS，Claude 能"看到"场景状态。blender-mcp 原生虽有截图 API 但只面向 Claude Desktop，我们将其扩展到了 Claude Code CLI。</p>
+  </div>
+  <div class="card">
+    <h4 style="color:#34d399">3. 复用 blender-mcp 生态</h4>
+    <p>不重复造轮子，直接适配 blender-mcp 的 Socket 协议，继承其全部 22 个 API 能力。</p>
+  </div>
+  <div class="card">
+    <h4 style="color:#34d399">4. MCP Server 封装</h4>
+    <p>将远程 Bridge 封装为 MCP Server，Claude Code 可以像本地 blender-mcp 一样用自然语言控制。</p>
+  </div>
+</div>
+
+<h3>8.3 架构总览</h3>
+
+<div class="arch">
+<pre>
+                      AWS 服务器                              Mac 公司内网
+               ┌─────────────────────┐              ┌──────────────────────────┐
+               │                     │              │                          │
+               │  Claude Code        │              │  Bridge Agent            │
+               │    │                │              │    │                     │
+               │    ├─ MCP Server    │              │    ├─ 每秒轮询 Relay     │
+               │    │  (6 个工具)     │              │    ├─ TCP Socket 调      │
+               │    │                │   HTTP       │    │  blender-mcp        │
+               │    └─> Relay Server │<─────────────│    │                     │
+               │        (:8080)      │──────────────│──> └─> 结果传回           │
+               │                     │              │                          │
+               │  aws_server.sh      │              │  Blender + blender-mcp   │
+               │  log/relay.log      │              │  (:9876 Socket)          │
+               └─────────────────────┘              └──────────────────────────┘
+</pre>
+</div>
+
+<!-- ==================== 9 演进 ==================== -->
+<h2 id="future">九、未来演进方向</h2>
+
+<div class="card">
+  <h4>1. Headless 渲染回传</h4>
+  <p>不只截取视口，还触发 Cycles/EEVEE 渲染，将渲染结果传回 AWS。实现"描述场景 → 渲染 → 查看效果"的完整闭环。</p>
+</div>
+
+<div class="card">
+  <h4>2. 操作前后对比</h4>
+  <p>每次执行操作前后各截一张图，Claude 对比确认效果。形成自动化的质量检查。</p>
+</div>
+
+<div class="card">
+  <h4>3. .blend 文件管理</h4>
+  <p>支持从 AWS 推送 .blend 文件到 Mac 打开，或者从 Mac 回传 .blend 文件。实现完整的文件同步。</p>
+</div>
+
+<div class="card">
+  <h4>4. 多用户支持</h4>
+  <p>Relay Server 支持多个 Bridge 连接，每个对应不同的 Blender 实例。适合团队协作场景。</p>
+</div>
+
+<div class="card">
+  <h4>5. WebSocket 替代轮询</h4>
+  <p>如果防火墙允许 WebSocket（通常走 443 端口），可以将轮询改为 WebSocket 长连接，降低延迟。</p>
+</div>
+
+<!-- ==================== 10 结论 ==================== -->
+<h2 id="conclusion">十、结论</h2>
+
+<h3>行业共识</h3>
+<ol>
+  <li>AI 最适合做 Blender 的<strong>"脚本助手"</strong>，而非"3D 艺术家"</li>
+  <li>插件开发、批量自动化、调试排错是 AI 最有价值的应用场景</li>
+  <li>场景原型可以用 AI 打草稿，但不能期望生产级质量</li>
+  <li><strong>视觉反馈是关键</strong> —— 没有截图/渲染回路的方案实用性大打折扣</li>
+</ol>
+
+<h3>我们方案的价值</h3>
+<p>在 Claude Code + 远程 Blender 的特定场景下，我们的 Bridge 方案是目前<strong>唯一可行的解决路径</strong>。它复用了 blender-mcp 的成熟生态，同时解决了跨网络和视觉反馈两个核心问题。</p>
+
+<h3>推荐策略</h3>
+<table>
+  <tr><th>任务类型</th><th>推荐方式</th></tr>
+  <tr><td>写插件/脚本</td><td>Claude Code 直接写 .py 文件，推送到 Mac 安装</td></tr>
+  <tr><td>场景原型</td><td>通过 Bridge 的 exec 执行 bpy 代码 + 截图迭代</td></tr>
+  <tr><td>批量操作</td><td>写脚本 → exec 执行</td></tr>
+  <tr><td>调试</td><td>截图 + logs + exec 排查</td></tr>
+  <tr><td>精细建模</td><td>手动操作 Blender，AI 仅辅助写辅助脚本</td></tr>
+</table>
+
+<footer>
+  Blender + AI 集成方案调研报告 &middot; 2026-04-06
+</footer>
+
+</div>
+</body>
+</html>
