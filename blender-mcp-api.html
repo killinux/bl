@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>blender-mcp API 速查手册</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    line-height: 1.7;
+    padding: 2rem 1rem;
+  }
+  .container { max-width: 980px; margin: 0 auto; }
+
+  header { text-align: center; margin-bottom: 2.5rem; }
+  header .tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #6366f1, #06b6d4);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 14px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #a78bfa, #38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+  header .subtitle { color: #64748b; font-size: 0.95rem; }
+
+  /* Nav */
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+  }
+  .nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: #334155; color: #e2e8f0; }
+  .nav .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* Category sections */
+  .category {
+    margin-bottom: 2.5rem;
+  }
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid #1e293b;
+  }
+  .category-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .category-header h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #f1f5f9;
+  }
+  .category-header .count {
+    font-size: 0.8rem;
+    color: #475569;
+    margin-left: auto;
+  }
+
+  /* API Card */
+  .api-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .api-card:hover { border-color: #475569; }
+
+  .api-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .api-head .fn {
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #7dd3fc;
+  }
+  .api-head .desc {
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-left: auto;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .api-head .toggle {
+    color: #475569;
+    font-size: 0.8rem;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .api-body {
+    display: none;
+    padding: 0 18px 16px;
+    border-top: 1px solid #293548;
+  }
+  .api-card.open .api-body { display: block; }
+  .api-card.open .toggle { transform: rotate(90deg); }
+
+  .api-body h4 {
+    font-size: 0.8rem;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 12px 0 6px;
+  }
+  .param-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  .param-table th {
+    text-align: left;
+    color: #64748b;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-bottom: 1px solid #293548;
+    font-size: 0.8rem;
+  }
+  .param-table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid #1e293b;
+    color: #94a3b8;
+  }
+  .param-table td:first-child {
+    font-family: monospace;
+    color: #fbbf24;
+    white-space: nowrap;
+  }
+  .param-table .type {
+    color: #a78bfa;
+    font-family: monospace;
+    font-size: 0.82rem;
+  }
+  .param-table .opt { color: #475569; font-style: italic; }
+
+  .example {
+    background: #0f172a;
+    border: 1px solid #293548;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-top: 6px;
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: #86efac;
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  .return-info {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin-top: 4px;
+  }
+
+  /* Color themes per category */
+  .cat-core .category-icon { background: #3b82f620; color: #60a5fa; }
+  .cat-core .api-head .fn { color: #60a5fa; }
+
+  .cat-poly .category-icon { background: #10b98120; color: #34d399; }
+  .cat-poly .api-head .fn { color: #34d399; }
+
+  .cat-sketch .category-icon { background: #f59e0b20; color: #fbbf24; }
+  .cat-sketch .api-head .fn { color: #fbbf24; }
+
+  .cat-hyper .category-icon { background: #ec489920; color: #f472b6; }
+  .cat-hyper .api-head .fn { color: #f472b6; }
+
+  .cat-hunyuan .category-icon { background: #8b5cf620; color: #a78bfa; }
+  .cat-hunyuan .api-head .fn { color: #a78bfa; }
+
+  /* Summary box */
+  .summary {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    text-align: center;
+  }
+  .summary-item .num {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #a78bfa, #38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .summary-item .label { color: #64748b; font-size: 0.85rem; }
+
+  /* Tip box */
+  .tip {
+    background: #172554;
+    border: 1px solid #1e3a5f;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 1rem 0;
+    color: #93c5fd;
+    font-size: 0.88rem;
+  }
+  .tip strong { color: #60a5fa; }
+
+  footer {
+    margin-top: 3rem;
+    text-align: center;
+    color: #334155;
+    font-size: 0.82rem;
+  }
+  footer a { color: #6366f1; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="tag">MCP Tools Reference</div>
+  <h1>blender-mcp API 速查手册</h1>
+  <p class="subtitle">ahujasid/blender-mcp 提供的全部 22 个 MCP 工具一览</p>
+</header>
+
+<!-- Summary -->
+<div class="summary">
+  <div class="summary-item">
+    <div class="num">22</div>
+    <div class="label">API 总数</div>
+  </div>
+  <div class="summary-item">
+    <div class="num">5</div>
+    <div class="label">功能分类</div>
+  </div>
+  <div class="summary-item">
+    <div class="num">4</div>
+    <div class="label">核心 API</div>
+  </div>
+  <div class="summary-item">
+    <div class="num">3</div>
+    <div class="label">AI 生成引擎</div>
+  </div>
+</div>
+
+<!-- Nav -->
+<div class="nav">
+  <a href="#core"><span class="dot" style="background:#60a5fa"></span>基础操作</a>
+  <a href="#polyhaven"><span class="dot" style="background:#34d399"></span>PolyHaven</a>
+  <a href="#sketchfab"><span class="dot" style="background:#fbbf24"></span>Sketchfab</a>
+  <a href="#hyper3d"><span class="dot" style="background:#f472b6"></span>Hyper3D</a>
+  <a href="#hunyuan"><span class="dot" style="background:#a78bfa"></span>Hunyuan3D</a>
+</div>
+
+<!-- ==================== 基础操作 ==================== -->
+<div class="category cat-core" id="core">
+  <div class="category-header">
+    <div class="category-icon">&#9881;</div>
+    <h2>基础操作</h2>
+    <span class="count">4 个 API &middot; 最常用</span>
+  </div>
+
+  <div class="tip">
+    <strong>核心提示：</strong>创建物体、修改材质、打灯光、设置相机、渲染输出、设置动画关键帧等操作都通过 <code>execute_blender_code()</code> 执行 bpy 代码实现，没有单独的高层 API。
+  </div>
+
+  <!-- get_scene_info -->
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">get_scene_info()</span>
+      <span class="desc">获取场景全部信息</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <p class="return-info">无参数</p>
+      <h4>返回</h4>
+      <p class="return-info">场景名称、所有对象列表（名称、类型、位置、旋转、缩放）、活动相机、渲染设置等</p>
+      <h4>用法示例</h4>
+      <div class="example">列出当前 Blender 场景中的所有对象</div>
+    </div>
+  </div>
+
+  <!-- get_object_info -->
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">get_object_info(object_name)</span>
+      <span class="desc">获取单个对象详情</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>object_name</td><td class="type">string</td><td>对象名称，如 "Cube"</td></tr>
+      </table>
+      <h4>返回</h4>
+      <p class="return-info">位置、旋转、缩放、材质列表、网格数据（顶点数/面数）、包围盒、修改器等</p>
+      <h4>用法示例</h4>
+      <div class="example">获取 Cube 的详细信息，包括它的材质和顶点数</div>
+    </div>
+  </div>
+
+  <!-- execute_blender_code -->
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">execute_blender_code(code)</span>
+      <span class="desc">执行任意 Python 代码</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>code</td><td class="type">string</td><td>要执行的 Python/bpy 代码</td></tr>
+      </table>
+      <h4>返回</h4>
+      <p class="return-info">代码执行的标准输出、错误信息</p>
+      <h4>用法示例</h4>
+      <div class="example"># 创建一个红色球体
+import bpy
+bpy.ops.mesh.primitive_uv_sphere_add(radius=1, location=(0, 0, 0))
+obj = bpy.context.active_object
+mat = bpy.data.materials.new("Red")
+mat.use_nodes = True
+mat.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (1, 0, 0, 1)
+obj.data.materials.append(mat)</div>
+      <div class="tip">
+        <strong>万能 API：</strong>这是最强大的工具。创建物体、修改材质、灯光、相机、渲染、动画、导入导出等一切操作都可以通过它完成。
+      </div>
+    </div>
+  </div>
+
+  <!-- get_viewport_screenshot -->
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">get_viewport_screenshot(max_size)</span>
+      <span class="desc">截取 3D 视口截图</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>max_size</td><td class="type">int</td><td class="opt">可选，默认 800，截图最大尺寸（像素）</td></tr>
+      </table>
+      <h4>返回</h4>
+      <p class="return-info">PNG 格式的视口截图（base64 编码）</p>
+      <h4>用法示例</h4>
+      <div class="example">截个图看看当前场景的效果</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PolyHaven ==================== -->
+<div class="category cat-poly" id="polyhaven">
+  <div class="category-header">
+    <div class="category-icon">&#127795;</div>
+    <h2>PolyHaven 资产库</h2>
+    <span class="count">5 个 API &middot; 免费 HDR/材质/模型</span>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">get_polyhaven_status()</span>
+      <span class="desc">检查 PolyHaven 集成状态</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <p class="return-info">无参数</p>
+      <h4>返回</h4>
+      <p class="return-info">PolyHaven 是否可用、连接状态</p>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">get_polyhaven_categories(asset_type)</span>
+      <span class="desc">列出资产分类</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>asset_type</td><td class="type">string</td><td>"hdris" | "textures" | "models" | "all"</td></tr>
+      </table>
+      <h4>返回</h4>
+      <p class="return-info">分类名称列表</p>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">search_polyhaven_assets(asset_type, categories)</span>
+      <span class="desc">搜索资产</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>asset_type</td><td class="type">string</td><td>"hdris" | "textures" | "models"</td></tr>
+        <tr><td>categories</td><td class="type">string</td><td class="opt">可选，分类过滤</td></tr>
+      </table>
+      <h4>返回</h4>
+      <p class="return-info">资产列表（ID、名称、预览图等）</p>
+      <h4>用法示例</h4>
+      <div class="example">搜索 PolyHaven 上的木质纹理</div>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">download_polyhaven_asset(asset_id, asset_type, resolution, file_format)</span>
+      <span class="desc">下载并导入资产</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>asset_id</td><td class="type">string</td><td>资产 ID</td></tr>
+        <tr><td>asset_type</td><td class="type">string</td><td>"hdris" | "textures" | "models"</td></tr>
+        <tr><td>resolution</td><td class="type">string</td><td class="opt">可选，如 "2k"、"4k"</td></tr>
+        <tr><td>file_format</td><td class="type">string</td><td class="opt">可选，如 "hdr"、"exr"</td></tr>
+      </table>
+      <h4>返回</h4>
+      <p class="return-info">下载状态、导入结果</p>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">set_texture(object_name, texture_id)</span>
+      <span class="desc">给对象应用 PolyHaven 材质</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>object_name</td><td class="type">string</td><td>目标对象名称</td></tr>
+        <tr><td>texture_id</td><td class="type">string</td><td>PolyHaven 材质 ID</td></tr>
+      </table>
+      <h4>用法示例</h4>
+      <div class="example">把 Cube 贴上 PolyHaven 的 wood_planks_04 材质</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Sketchfab ==================== -->
+<div class="category cat-sketch" id="sketchfab">
+  <div class="category-header">
+    <div class="category-icon">&#128230;</div>
+    <h2>Sketchfab 模型库</h2>
+    <span class="count">4 个 API &middot; 海量 3D 模型</span>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">get_sketchfab_status()</span>
+      <span class="desc">检查 Sketchfab 集成状态</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <p class="return-info">无参数</p>
+      <h4>返回</h4>
+      <p class="return-info">Sketchfab 是否可用、API Key 是否已配置</p>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">search_sketchfab_models(query, categories, count, downloadable)</span>
+      <span class="desc">搜索 3D 模型</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>query</td><td class="type">string</td><td>搜索关键词</td></tr>
+        <tr><td>categories</td><td class="type">string</td><td class="opt">可选，分类过滤</td></tr>
+        <tr><td>count</td><td class="type">int</td><td class="opt">可选，返回数量</td></tr>
+        <tr><td>downloadable</td><td class="type">bool</td><td class="opt">可选，仅可下载模型</td></tr>
+      </table>
+      <h4>用法示例</h4>
+      <div class="example">在 Sketchfab 上搜索可下载的椅子模型</div>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">get_sketchfab_model_preview(uid)</span>
+      <span class="desc">获取模型预览图</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>uid</td><td class="type">string</td><td>模型的 UID</td></tr>
+      </table>
+      <h4>返回</h4>
+      <p class="return-info">模型缩略图（base64 编码）</p>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">download_sketchfab_model(uid, target_size)</span>
+      <span class="desc">下载并导入模型</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>uid</td><td class="type">string</td><td>模型的 UID</td></tr>
+        <tr><td>target_size</td><td class="type">float</td><td class="opt">可选，目标缩放大小</td></tr>
+      </table>
+      <h4>返回</h4>
+      <p class="return-info">下载状态、导入后的对象名称</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Hyper3D ==================== -->
+<div class="category cat-hyper" id="hyper3d">
+  <div class="category-header">
+    <div class="category-icon">&#10024;</div>
+    <h2>Hyper3D Rodin</h2>
+    <span class="count">5 个 API &middot; AI 文字/图片生成 3D</span>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">get_hyper3d_status()</span>
+      <span class="desc">检查 Hyper3D 集成状态</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <p class="return-info">无参数</p>
+      <h4>返回</h4>
+      <p class="return-info">Hyper3D Rodin 是否可用、API Key 是否已配置</p>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">generate_hyper3d_model_via_text(text_prompt, bbox_condition)</span>
+      <span class="desc">文字生成 3D 模型</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>text_prompt</td><td class="type">string</td><td>文字描述，如 "a wooden chair"</td></tr>
+        <tr><td>bbox_condition</td><td class="type">list</td><td class="opt">可选，包围盒约束 [x, y, z]</td></tr>
+      </table>
+      <h4>返回</h4>
+      <p class="return-info">subscription_key 和 request_id，用于后续轮询</p>
+      <h4>用法示例</h4>
+      <div class="example">用 AI 生成一把中世纪风格的剑</div>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">generate_hyper3d_model_via_images(input_image_paths, input_image_urls, bbox_condition)</span>
+      <span class="desc">图片生成 3D 模型</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>input_image_paths</td><td class="type">list[string]</td><td class="opt">本地图片路径列表</td></tr>
+        <tr><td>input_image_urls</td><td class="type">list[string]</td><td class="opt">图片 URL 列表</td></tr>
+        <tr><td>bbox_condition</td><td class="type">list</td><td class="opt">可选，包围盒约束</td></tr>
+      </table>
+      <h4>返回</h4>
+      <p class="return-info">subscription_key 和 request_id</p>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">poll_rodin_job_status(subscription_key, request_id)</span>
+      <span class="desc">查询生成进度</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>subscription_key</td><td class="type">string</td><td>订阅 Key</td></tr>
+        <tr><td>request_id</td><td class="type">string</td><td>请求 ID</td></tr>
+      </table>
+      <h4>返回</h4>
+      <p class="return-info">生成状态（进行中 / 完成 / 失败）、task_uuid</p>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">import_generated_asset(name, task_uuid, request_id)</span>
+      <span class="desc">导入已生成的模型</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>name</td><td class="type">string</td><td>导入后的对象名称</td></tr>
+        <tr><td>task_uuid</td><td class="type">string</td><td>任务 UUID</td></tr>
+        <tr><td>request_id</td><td class="type">string</td><td>请求 ID</td></tr>
+      </table>
+      <h4>返回</h4>
+      <p class="return-info">导入结果、对象名称</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== Hunyuan3D ==================== -->
+<div class="category cat-hunyuan" id="hunyuan">
+  <div class="category-header">
+    <div class="category-icon">&#128302;</div>
+    <h2>Hunyuan3D (腾讯)</h2>
+    <span class="count">4 个 API &middot; AI 生成 3D</span>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">get_hunyuan3d_status()</span>
+      <span class="desc">检查 Hunyuan3D 集成状态</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <p class="return-info">无参数</p>
+      <h4>返回</h4>
+      <p class="return-info">Hunyuan3D 是否可用</p>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">generate_hunyuan3d_model(text_prompt, input_image_url)</span>
+      <span class="desc">文字或图片生成 3D 模型</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>text_prompt</td><td class="type">string</td><td class="opt">可选，文字描述</td></tr>
+        <tr><td>input_image_url</td><td class="type">string</td><td class="opt">可选，参考图片 URL</td></tr>
+      </table>
+      <h4>返回</h4>
+      <p class="return-info">job_id，用于后续轮询</p>
+      <h4>用法示例</h4>
+      <div class="example">用 Hunyuan3D 根据这张图片生成 3D 模型</div>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">poll_hunyuan_job_status(job_id)</span>
+      <span class="desc">查询生成进度</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>job_id</td><td class="type">string</td><td>任务 ID</td></tr>
+      </table>
+      <h4>返回</h4>
+      <p class="return-info">生成状态、完成后返回 zip 文件 URL</p>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-head" onclick="this.parentElement.classList.toggle('open')">
+      <span class="fn">import_generated_asset_hunyuan(name, zip_file_url)</span>
+      <span class="desc">导入已生成的模型</span>
+      <span class="toggle">&#9654;</span>
+    </div>
+    <div class="api-body">
+      <h4>参数</h4>
+      <table class="param-table">
+        <tr><th>名称</th><th>类型</th><th>说明</th></tr>
+        <tr><td>name</td><td class="type">string</td><td>导入后的对象名称</td></tr>
+        <tr><td>zip_file_url</td><td class="type">string</td><td>生成结果的 ZIP 下载 URL</td></tr>
+      </table>
+      <h4>返回</h4>
+      <p class="return-info">导入结果、对象名称</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 快速对比 ==================== -->
+<div class="category">
+  <div class="category-header">
+    <div class="category-icon" style="background:#47556920; color:#94a3b8;">&#9878;</div>
+    <h2>blender-mcp vs Bridge 方案对比</h2>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th></th><th>blender-mcp</th><th>Bridge 方案</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>网络要求</td><td>同一台机器 (localhost)</td><td>可跨网络，内网穿透</td></tr>
+      <tr><td>集成方式</td><td>MCP 原生工具</td><td>CLI 命令行</td></tr>
+      <tr><td>核心能力</td><td>执行代码 + 截图 + 场景查询</td><td>执行代码 + 截图 + 日志 + 文件推送</td></tr>
+      <tr><td>资产库</td><td>PolyHaven + Sketchfab</td><td>无（可通过代码执行间接使用）</td></tr>
+      <tr><td>AI 生成</td><td>Hyper3D + Hunyuan3D</td><td>无</td></tr>
+      <tr><td>适用场景</td><td>本地开发</td><td>远程开发（AWS + 内网 Mac）</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<footer>
+  <p>参考项目：<a href="https://github.com/ahujasid/blender-mcp" target="_blank">github.com/ahujasid/blender-mcp</a></p>
+  <p style="margin-top:6px;">生成日期：2026-04-05</p>
+</footer>
+
+</div>
+</body>
+</html>
