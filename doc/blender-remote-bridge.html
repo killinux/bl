@@ -101,7 +101,9 @@
 ├── <span class="dir">mcp/</span> <span class="desc">── AWS 端，MCP Server（推荐）</span><br>
 │&nbsp;&nbsp; ├── <span class="file">blender_mcp_server.py</span> <span class="desc">── MCP 工具封装</span><br>
 │&nbsp;&nbsp; └── <span class="file">requirements.txt</span><br>
-└── <span class="file">mac.sh</span> <span class="desc">── Mac 端 Bridge 启动脚本</span>
+├── <span class="file">aws_server.sh</span> <span class="desc">── AWS 端 Relay 启动/管理脚本</span><br>
+├── <span class="file">mac.sh</span> <span class="desc">── Mac 端 Bridge 启动脚本</span><br>
+└── <span class="dir">log/</span> <span class="desc">── 运行日志（不提交 git）</span>
 </div>
 
 <!-- ==================== 首次搭建 ==================== -->
@@ -121,14 +123,16 @@
   <span class="step-num">2</span>
   <h3>启动 Relay Server</h3>
   <pre><code><span class="cmd">conda activate</span> blender-relay
-<span class="cmd">cd</span> /opt/workspace/bl/relay
+<span class="cmd">cd</span> /opt/workspace/bl
 
+<span class="comment"># 用脚本启动（推荐，自动后台运行 + 写日志）</span>
+<span class="cmd">sh aws_server.sh start</span>
+
+<span class="comment"># 或者手动启动</span>
+<span class="cmd">cd</span> relay
 <span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">mysecretkey</span> \
   <span class="cmd">uvicorn</span> server:app --host 0.0.0.0 --port 8080 &
-
-<span class="comment"># 验证</span>
-<span class="cmd">curl</span> http://localhost:8080/health
-<span class="comment"># 应返回 {"status":"ok","tasks":0,"files":0}</span></code></pre>
+<span class="cmd">curl</span> http://localhost:8080/health</code></pre>
 </div>
 
 <div class="step">
@@ -178,8 +182,8 @@
   <span class="step-num">1</span>
   <h3>AWS — 启动 Relay</h3>
   <pre><code><span class="cmd">conda activate</span> blender-relay
-<span class="cmd">cd</span> /opt/workspace/bl/relay
-<span class="keyword">BLENDER_RELAY_API_KEY</span>=<span class="string">mysecretkey</span> <span class="cmd">uvicorn</span> server:app --host 0.0.0.0 --port 8080 &</code></pre>
+<span class="cmd">cd</span> /opt/workspace/bl
+<span class="cmd">sh aws_server.sh start</span></code></pre>
 </div>
 
 <div class="step">
@@ -306,8 +310,36 @@
 
 <p>所有端点（除 /health）通过 <code>X-API-Key</code> Header 认证。内存存储，任务 5 分钟过期自动清理。</p>
 
+<!-- ==================== 脚本 ==================== -->
+<h2>九、启动脚本说明</h2>
+
+<h3>aws_server.sh（AWS 端）</h3>
+
+<pre><code><span class="cmd">sh aws_server.sh start</span>      <span class="comment"># 启动 Relay（后台运行，日志写入 log/relay.log）</span>
+<span class="cmd">sh aws_server.sh stop</span>       <span class="comment"># 停止 Relay</span>
+<span class="cmd">sh aws_server.sh restart</span>    <span class="comment"># 重启 Relay</span>
+<span class="cmd">sh aws_server.sh status</span>     <span class="comment"># 查看运行状态</span>
+<span class="cmd">sh aws_server.sh log</span>        <span class="comment"># 查看最近 50 行日志</span>
+<span class="cmd">sh aws_server.sh log 200</span>    <span class="comment"># 查看最近 200 行日志</span></code></pre>
+
+<p>日志文件：<code>/opt/workspace/bl/log/relay.log</code><br>
+PID 文件：<code>/opt/workspace/bl/log/relay.pid</code></p>
+
+<div class="tip">
+  <strong>自定义 API Key：</strong>默认使用 <code>mysecretkey</code>，可通过环境变量覆盖：<br>
+  <code>BLENDER_RELAY_API_KEY=你的密钥 sh aws_server.sh start</code>
+</div>
+
+<h3>mac.sh（Mac 端）</h3>
+
+<pre><code><span class="comment"># 直接运行，启动 Bridge 轮询代理</span>
+<span class="cmd">cd</span> ~/bl
+<span class="cmd">sh mac.sh</span></code></pre>
+
+<p>如需修改 AWS IP 或 API Key，编辑 <code>mac.sh</code> 文件。</p>
+
 <!-- ==================== 故障排除 ==================== -->
-<h2>九、故障排除</h2>
+<h2>十、故障排除</h2>
 
 <table>
   <tr><th>问题</th><th>排查方式</th></tr>
@@ -320,7 +352,7 @@
 </table>
 
 <!-- ==================== 环境变量 ==================== -->
-<h2>十、环境变量汇总</h2>
+<h2>十一、环境变量汇总</h2>
 
 <table>
   <tr><th>变量名</th><th>用于</th><th>默认值</th><th>说明</th></tr>
