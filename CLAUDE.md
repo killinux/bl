@@ -7,7 +7,7 @@
 确保 AWS Relay 和 Mac Bridge 已启动（见下方"启动"），然后直接使用 CLI：
 
 ```bash
-cd /opt/workspace/mytest/bl/cli
+cd /opt/mywork/mytest/bl
 BLENDER_RELAY_API_KEY=mysecretkey python cli.py exec "print(bpy.data.objects.keys())"
 BLENDER_RELAY_API_KEY=mysecretkey python cli.py screenshot
 BLENDER_RELAY_API_KEY=mysecretkey python cli.py logs
@@ -18,7 +18,7 @@ BLENDER_RELAY_API_KEY=mysecretkey python cli.py logs
 AWS 端：
 ```bash
 conda activate blender-relay
-cd /opt/workspace/mytest/bl
+cd /opt/mywork/mytest/bl
 sh aws_server.sh start
 ```
 
