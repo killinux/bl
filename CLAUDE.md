@@ -8,9 +8,9 @@
 
 ```bash
 cd /opt/mywork/mytest/bl
-BLENDER_RELAY_API_KEY=mysecretkey python cli.py exec "print(bpy.data.objects.keys())"
-BLENDER_RELAY_API_KEY=mysecretkey python cli.py screenshot
-BLENDER_RELAY_API_KEY=mysecretkey python cli.py logs
+BLENDER_RELAY_API_KEY=mysecretkey python cli/cli.py exec "print(bpy.data.objects.keys())"
+BLENDER_RELAY_API_KEY=mysecretkey python cli/cli.py screenshot
+BLENDER_RELAY_API_KEY=mysecretkey python cli/cli.py logs
 ```
 
 ## 启动
