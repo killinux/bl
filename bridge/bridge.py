@@ -23,7 +23,7 @@ session = requests.Session()
 session.headers["X-API-Key"] = API_KEY
 
 
-def send_to_blender(command: dict, timeout: float = 30.0) -> dict:
+def send_to_blender(command: dict, timeout: float = 120.0) -> dict:
     """Send a JSON command to blender-mcp addon via TCP socket."""
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.settimeout(timeout)

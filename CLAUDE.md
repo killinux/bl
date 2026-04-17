@@ -22,7 +22,13 @@ cd /opt/mywork/mytest/bl
 sh aws_server.sh start
 ```
 
-Mac 端：Blender 里 N 面板 → BlenderMCP → Start MCP Server，然后终端跑 `sh mac.sh`。
+Mac 端：
+Blender 里 N 面板 → BlenderMCP → Start MCP Server，然后终端跑
+```bash
+source /opt/homebrew/anaconda3/etc/profile.d/conda.sh
+conda activate blender
+sh mac.sh
+```
 
 ## 架构
 
@@ -45,7 +51,7 @@ Claude CLI → Relay Server (:8080) ← Bridge (Mac 轮询) → blender-mcp 插�
 - Mac 端通过 `git pull` 同步，**不要直接在 Mac 上改代码**
 - 仓库路径：
   - bl: AWS `/opt/mywork/mytest/bl/` ↔ Mac `/Users/bytedance/work/mytest/bl/`
-  - 插件: AWS `/opt/mywork/mytest/Convert-to-MMD-claude/` ↔ Mac `/Users/bytedance/Library/Application Support/Blender/3.6/scripts/addons/Convert_to_MMD_claude/`
+  - 插件: AWS `/opt/mywork/mytest/Convert_to_MMD_claude/` ↔ Mac `/Users/bytedance/Library/Application Support/Blender/3.6/scripts/addons/Convert_to_MMD_claude/`
 
 ## XPS→PMX 转换注意事项
 
