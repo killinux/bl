@@ -74,7 +74,7 @@ def cmd_exec(args):
 
     task_id = create_task("exec", {"code": code})
     print(f"Executing code (task {task_id})...")
-    data = wait_for_result(task_id, timeout=30)
+    data = wait_for_result(task_id, timeout=120)
 
     result = data.get("result", {})
     if result.get("stdout"):

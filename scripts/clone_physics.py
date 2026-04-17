@@ -27,6 +27,15 @@ from collections import defaultdict
 
 SHAPE_IDX = {'SPHERE': 0, 'BOX': 1, 'CAPSULE': 2}
 
+# mmd_tools 辅助骨前缀: build_rig() 生成的 trans/shadow/dummy 骨不应参与物理匹配
+_AUX_BONE_PREFIXES = ('_dummy_', '_shadow_', '_placeholder_')
+
+
+def _is_aux_bone(bone_name):
+    """判断是否为 mmd_tools 生成的辅助骨 (trans/shadow/dummy)."""
+    low = bone_name.lower()
+    return any(low.startswith(p) for p in _AUX_BONE_PREFIXES) or low.endswith('.t')
+
 
 def _get_mmd_model(root_name_or_obj):
     from mmd_tools.core.model import Model as MMDModel
@@ -47,7 +56,7 @@ def extract(src_root_name):
     rigid_name_to_idx = {}
     for i, sr in enumerate(src_model.rigidBodies()):
         bname = sr.mmd_rigid.bone
-        if not bname or bname not in src_arm.data.bones:
+        if not bname or bname not in src_arm.data.bones or _is_aux_bone(bname):
             rigids.append(None)  # placeholder so indices line up for joint refs
             continue
         sb_mat = _bone_world_rest(src_arm, bname)
@@ -137,7 +146,7 @@ def apply(dst_root_name, data, *, rescale_by_bone_length=True):
         if entry is None:
             continue
         bname = entry['bone']
-        if bname not in dst_bone_names:
+        if bname not in dst_bone_names or _is_aux_bone(bname):
             skipped_bones.append(bname)
             continue
         db_mat = _bone_world_rest(dst_arm, bname)
